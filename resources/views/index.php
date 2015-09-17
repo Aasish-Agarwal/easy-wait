@@ -38,6 +38,13 @@
   text-align: center;
 }
 
+.bookedbox {
+  width: 150px;
+  background-color: grey;
+  color: black;
+  text-align: center;
+}
+
 .widgetbox h1 {
   background-color: black;
 }
@@ -74,7 +81,7 @@
       	</div>
 	      	<div class="row">
 	
-	      		<div class="col-md-3">
+	      		<div class="col-md-4">
 			                <form class="navbar-form">
 			                	<button class="btn btn-primary btn-danger btn-block" ng-click="vm.removeSubscription(vm.mobile)">Un Subscribe</button>
 	      						<div class="widgetbox">
@@ -83,13 +90,48 @@
 			                	</div>
 			                </form>
 	      		</div>
-	      		<div class="well  col-md-6">
+
+	      		<div class="well col-md-4">
+					<h3>Current Bookings: </h3>
+		      		<div ng-repeat="counter in vm.booked_counters"> 
+						  <table  border="1">
+						  <tr>
+						  
+						  <td><button class="glyphicon glyphicon-remove btn btn-danger"></button></td>
+						  <td class="bookedbox">{{vm.current_bookings[counter]}}</td>
+						  <td class="bookedbox">{{counter}}</td>
+							</tr>
+						 </table>
+					</div>
+
+		      		<div ng-show="vm.isAcceptingBookings" class="widgetbox">
+						<form class="navbar-form">
+		                	<input type="text" class="form-control" ng-model="vm.booking_reference" placeholder="Reference" ng-minlength=3 ng-maxlength=32>
+		                    </input>
+		                	<input type="number" class="form-control" ng-model="vm.preferred_position" placeholder="Preferred Position" ng-minlength=1 ng-maxlength=2>
+		                    </input>
+		                    <button class="btn btn-primary"  ng-click="vm.addBooking(vm.mobile,vm.booking_reference,vm.preferred_position)">Book</button>
+						</form>
+					</div>
+					
+				</div>
+	      		
+	      		
+	      		<div class="well  col-md-4">
 			      	<h3>Subscription History: <h3>
 			      		<div ng-repeat="mobile in vm.subscribed_numbers"> 
-							<button class="btn btn-default" ng-click="vm.setMobile(mobile)">{{ vm.vendor_info_map[mobile] }}</button>
+						  <table  border="1">
+						  <tr>
+						  
+						  <td><button class="glyphicon glyphicon-remove btn btn-danger"></button></td>
+						  <td class="bookedbox">{{ vm.vendor_info_map[mobile] }}</td>
+						  <td><button class="glyphicon glyphicon-ok btn btn-danger" ng-click="vm.setMobile(mobile)"></button></td>
+						  </tr>
+						 </table>
+							
 						</div>
-	      		</div>
-	      		<div class="well   col-md-3">
+
+	      		<div class="well ">
 	      			<h3>Subscribe: </h3>
 	                <form class="navbar-form">
 	                    <label>Phone Number with country code</label><br>
@@ -98,29 +140,14 @@
 	                    <button class="btn btn-primary btn-block" ng-click="vm.setMobile(vm.mobile_to_subscribe)">Subscribe</button>
 					</form>
 	      		</div>
+						
+						
+				</div>
 	      	</div>
 
 	      	<hr>
 	      	<hr>
-			<div class="row">
-	      		<div class="well    col-md-9">
-					<h3>Current Bookings: </h3>
-		      		<div ng-repeat="counter in vm.booked_counters"> 
-	                	{{counter + '-' +  vm.current_bookings[counter]}}
-					</div>
-				</div>
-	      		<div ng-show="vm.isAcceptingBookings" class="well col-md-3">
-					<h3>Book: </h3>
-					<form class="navbar-form">
-	                	<input type="text" class="form-control" ng-model="vm.booking_reference" placeholder="Reference" ng-minlength=3 ng-maxlength=32>
-	                    </input>
-	                	<input type="number" class="form-control" ng-model="vm.preferred_position" placeholder="Preferred Position" ng-minlength=1 ng-maxlength=2>
-	                    </input>
-	                    <button class="btn btn-primary btn-block"  ng-click="vm.addBooking(vm.mobile,vm.booking_reference,vm.preferred_position)">Book</button>
-					</form>
-				</div>
-				
-	      	</div>
+
 	      	
       	<div class="row">
 			<h4>{{vm.message}}</h4>
