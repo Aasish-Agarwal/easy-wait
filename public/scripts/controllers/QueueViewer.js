@@ -26,14 +26,20 @@
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
                 vm.vendor_info_map = angular.fromJson($cookies.get('vendor_info_map'));
                 vm.current_bookings = angular.fromJson($cookies.get('current_bookings'));
+                vm.all_bookings = angular.fromJson($cookies.get('all_bookings'));
                 vm.booked_counters = {};
                 
                 vm.expireDate = new Date();
                 vm.expireDate.setDate(vm.expireDate.getDate() + 365);
                 vm.isAcceptingBookings = 0;
-
+                
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
+
+                if (! vm.all_bookings ) {
+                	vm.all_bookings = {};
+                } 
+                
                 
                 if (! vm.mobile ) {
                 	vm.mobile = '';
@@ -108,6 +114,13 @@
                 vm.subscribed_numbers[mobile] = mobile; 
                 vm.currentBookingStatus(mobile);
                 
+                if ( vm.all_bookings[mobile] ) {
+                	vm.current_bookings = vm.all_bookings[mobile] ;
+                	vm.booked_counters = Object.keys(vm.current_bookings);
+                } else {
+                	vm.all_bookings[mobile] = {};
+                }
+                
                 qstatus.getvendorinfo(mobile).then(function(results) {
                 	vm.vendor_info_map[mobile] = results.data.name;
                   console.log(results);
@@ -163,7 +176,9 @@
                     if ( results.data.status > 0 ) {
                     	vm.current_bookings[results.data.counter] = reference;
                     	vm.booked_counters = Object.keys(vm.current_bookings);
+                    	vm.all_bookings[mobile] = vm.current_bookings;
                         $cookies.put('current_bookings',angular.toJson(vm.current_bookings), {'expires': vm.expireTomorrow});
+                        $cookies.put('all_bookings',angular.toJson(vm.all_bookings), {'expires': vm.expireTomorrow});
                         vm.booking_reference = '';
                     } else {
                     	alert ("Failed to book appointment: " + results.data.srvr_msg);
