@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Easy Wait</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Bootstrap 
+-->
+         
+	  		<link href="bs/css/bootstrap.min.css" rel="stylesheet">
+         	  <link href="bs/css/bootstrap-theme.min.css" rel="stylesheet">
+         	  
+	  
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+         queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page
+         via file:// -->
+      <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/
+            html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/
+            respond.min.js"></script>
+      <![endif]-->
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+       <script src="js/jquery.cookie.js"></script>
+
+		<script>
+		$(function(){
+			$("#navbar").load("nav.html");
+		});
+		</script>
+
+<style type='text/css'>
+.widgetbox {<!--from  ww w . ja va2s  .co  m-->
+  height: 50px;
+  background-color: green;
+  color: white;
+  text-align: center;
+}
+
+.widgetbox h1 {
+  background-color: black;
+}
+
+.widgetbox [class*="icon-"] {
+  display: block;
+  transition-property: transform, color;
+  transition-duration: 0.8s;
+  -webkit-transition-property: -webkit-transform, color;
+  -webkit-transition-duration: 0.8s;
+  -ms-transition-property: -ms-transform, color;
+  -ms-transition-duration: 0.8s;
+}
+
+.widgetbox:hover [class*="icon-"] {
+  color: #24a159 !important;
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+}
+</style>
+
+		
+		</head>
+   <body ng-app="easywait" ng-controller="QueueViewer as vm" data-ng-init="vm.init()">
+
+   <div id="navbar"></div>
+   
+      <!-- Grid System
+      ====================================== -->
+      <div class="container">
+      	<div class="row">
+      	<h3></h3>
+      	</div>
+	      	<div class="row">
+	
+	      		<div class="col-md-3">
+			                <form class="navbar-form">
+			                	<button class="btn btn-primary btn-danger btn-block" ng-click="vm.removeSubscription(vm.mobile)">Un Subscribe</button>
+	      						<div class="widgetbox">
+			                	{{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}
+			                	<h1>{{vm.counter}}<h1>
+			                	</div>
+			                </form>
+	      		</div>
+	      		<div class="well  col-md-6">
+			      	<h3>Subscription History: <h3>
+			      		<div ng-repeat="mobile in vm.subscribed_numbers"> 
+							<button class="btn btn-default" ng-click="vm.setMobile(mobile)">{{ vm.vendor_info_map[mobile] }}</button>
+						</div>
+	      		</div>
+	      		<div class="well   col-md-3">
+	      			<h3>Subscribe: </h3>
+	                <form class="navbar-form">
+	                    <label>Phone Number with country code</label><br>
+	                	<input type="number" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13>
+	                    </input>
+	                    <button class="btn btn-primary btn-block" ng-click="vm.setMobile(vm.mobile_to_subscribe)">Subscribe</button>
+					</form>
+	      		</div>
+	      	</div>
+
+	      	<hr>
+	      	<hr>
+			<div class="row">
+	      		<div class="well    col-md-9">
+					<h3>Current Bookings: </h3>
+		      		<div ng-repeat="counter in vm.booked_counters"> 
+	                	{{counter + '-' +  vm.current_bookings[counter]}}
+					</div>
+				</div>
+	      		<div ng-show="vm.isAcceptingBookings" class="well col-md-3">
+					<h3>Book: </h3>
+					<form class="navbar-form">
+	                	<input type="text" class="form-control" ng-model="vm.booking_reference" placeholder="Reference" ng-minlength=3 ng-maxlength=32>
+	                    </input>
+	                	<input type="number" class="form-control" ng-model="vm.preferred_position" placeholder="Preferred Position" ng-minlength=1 ng-maxlength=2>
+	                    </input>
+	                    <button class="btn btn-primary btn-block"  ng-click="vm.addBooking(vm.mobile,vm.booking_reference,vm.preferred_position)">Book</button>
+					</form>
+				</div>
+				
+	      	</div>
+	      	
+      	<div class="row">
+			<h4>{{vm.message}}</h4>
+		</div>
+		
+      </div>
+
+      
+      
+      <!-- Include all compiled plugins (below), or include individual files
+            as needed -->
+	  <script src="bs/js/bootstrap.min.js"></script>
+    <!-- Application Dependencies -->
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+    
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/services/qstatus.js"></script>
+    <script type="text/javascript" src="scripts/controllers/QueueViewer.js"></script>
+    	  
+	  </body>
+</html>
+
+
