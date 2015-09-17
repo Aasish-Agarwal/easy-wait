@@ -31,12 +31,6 @@
 		</script>
 
 <style type='text/css'>
-.widgetbox {<!--from  ww w . ja va2s  .co  m-->
-  height: 50px;
-  background-color: green;
-  color: white;
-  text-align: center;
-}
 
 .bookedbox {
   width: 300px;
@@ -49,22 +43,6 @@
   background-color: green;
 }
 
-.widgetbox [class*="icon-"] {
-  display: block;
-  transition-property: transform, color;
-  transition-duration: 0.8s;
-  -webkit-transition-property: -webkit-transform, color;
-  -webkit-transition-duration: 0.8s;
-  -ms-transition-property: -ms-transform, color;
-  -ms-transition-duration: 0.8s;
-}
-
-.widgetbox:hover [class*="icon-"] {
-  color: #24a159 !important;
-  transform: rotate(360deg);
-  -webkit-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
-}
 </style>
 
 		
@@ -84,7 +62,7 @@
 	      		<div class="col-md-4">
 					<h3>Queue Status: </h3>
 	      				<form class="navbar-form">
-	      						<div class="bookedbox">
+	      					<div class="bookedbox">
 			                	{{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}
 			                	<h1>{{vm.counter}}<h1>
 			                	</div>

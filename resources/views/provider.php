@@ -25,6 +25,33 @@
 		});
 		</script>
 
+<style type='text/css'>
+
+.bookedbox {
+  width: 350px;
+  height: 40px;
+  color: white;
+  background-color: grey;
+	text-align: center;
+}
+
+.counterbox {
+  color: white;
+  text-align: center;
+}
+
+.counterbox td {
+  width: 30px;
+  background-color: black;
+}
+
+.counterbox td h1 {
+  width: 140px;
+  background-color: green;
+}
+
+</style>
+		
    </head>
    <body ng-app="easywait" ng-controller="QueuePublisher as vm" data-ng-init="vm.init()">
 
@@ -38,24 +65,36 @@
       	</div>
       	<div class="row">
 			<div class="well col-md-3">
-			          <form class="navbar-form">
-			                 <button class="btn btn-danger btn-lg btn-block" ng-click="vm.stoplocal()">Stop</button>
-			                 <h1><span class="label label-success">{{vm.counter}}</span></h1>
-			              <h3><span class="label label-default">{{ vm.auth_username }} - {{ vm.registered_mobile }}</span></h3>
-			          	<button class="btn btn-primary btn-lg btn-block" ng-click="vm.nextlocal()">Next</button>
-			              </form>
+		                	{{ vm.auth_username }} - {{ vm.registered_mobile }}
+      					<div class="counterbox">
+		                	<table >
+		                	<tr>
+		                	<td><button class="glyphicon glyphicon-stop btn btn-danger" ng-click="vm.stoplocal()"></button></td>
+		                	<td><h1>{{vm.counter}}<h1></td>
+		                	<td>{{vm.server_counter}}</td>
+		                	<td><button class="glyphicon glyphicon-forward btn btn-danger" ng-click="vm.nextlocal()"></button></td>
+		                	</tr>
+		                	</table>
+		                </div>
 			</div>
-			<div class="well col-md-3">
+			<div class="col-md-4">
 			          <form class="navbar-form">
 			          	<button class="btn btn-primary btn-lg btn-block" ng-hide="vm.isAcceptingBookings" ng-click="vm.acceptAppointments()">Accept Appointments</button>
 			          	<button class="btn btn-danger btn-lg btn-block" ng-show="vm.isAcceptingBookings" ng-click="vm.closeAppointments()">Close Appointments</button>
 			          </form>
 			</div>
-			<div class="well col-md-6">
-				<h1>Appointments shown here </h1>
+			<div class="col-md-4">
+				<h3>Current Bookings:</h3>
 					<div ng-repeat="booking in vm.current_bookings"> 
-	                	{{booking.counter + " - " + booking.reference}}
-					</div>
+						  <table  border="1">
+						  <tr>
+						  
+						  <td class="bookedbox">{{booking.reference}}</td>
+						  <td class="bookedbox">{{booking.counter}}</td>
+							</tr>
+						 </table>
+	                	
+	                </div>
 			        <button class="btn btn-danger btn-lg btn-block" ng-click="vm.clearAllBookings()">Clear All Appointments</button>
 			</div>
 		</div>
