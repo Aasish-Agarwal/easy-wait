@@ -94,7 +94,7 @@
             	vm.message = '' ;
             	qstatus.getStatus(vm.mobile).then(function(results) {
         		  vm.counter = results.data.counter;
-        		  $timeout(vm.getStatus, 10000);
+        		  $timeout(vm.getStatus, 60000);
                   console.log(results);
               }, function(error) {
                 console.log(error);
@@ -189,6 +189,23 @@
 
             }
 
+            
+            vm.cancelBooking = function(mobile,reference,counter) {
+            	qstatus.cancelBooking(mobile,reference).then(function(results) {
+            			console.log(results);
+	                    if ( results.data.status > 0 ) {
+	                    	delete vm.current_bookings[counter];
+	                    	vm.booked_counters = Object.keys(vm.current_bookings);
+	                    	vm.all_bookings[mobile] = vm.current_bookings;
+	                        $cookies.put('current_bookings',angular.toJson(vm.current_bookings), {'expires': vm.expireTomorrow});
+	                        $cookies.put('all_bookings',angular.toJson(vm.all_bookings), {'expires': vm.expireTomorrow});
+	                    } 
+		            }, function(error) {
+		                  console.log(error);
+		             });
+            }
+            
+            
             vm.currentBookingStatus = function(mobile) {
             	qstatus.isAcceptingAppointment(mobile).then(function(results) {
             		vm.isAcceptingBookings = results.data.bookings_open;
@@ -200,10 +217,19 @@
 
             vm.removeSubscription = function(mobile) {
             	delete vm.subscribed_numbers[mobile];
-                vm.counter = '';
-                vm.mobile = '';
-                $cookies.remove('last_subscription');
+            	delete vm.all_bookings[mobile] ;
+
+                if ( mobile == vm.mobile ) {
+                	vm.counter = '';
+                    vm.mobile = '';
+                	vm.booked_counters = {};
+                	vm.current_bookings = {};
+                    $cookies.remove('last_subscription');
+                    $cookies.remove('current_bookings');
+                }
+                
                 $cookies.put('subscribed_numbers',angular.toJson(vm.subscribed_numbers), {'expires': vm.expireDate});
+                $cookies.put('all_bookings',angular.toJson(vm.all_bookings), {'expires': vm.expireTomorrow});
             }
     }
     

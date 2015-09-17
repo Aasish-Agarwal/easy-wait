@@ -19,7 +19,7 @@ class AppointmentController extends Controller
 	public function cancel($cell, $reference)
 	{
 		$retval = array();
-		$retval['status'] = 0;
+		$retval['status'] = 1;
 		$apointment = new Appointments();
 		$apointment->cancel($cell, $reference);
 		return($retval);

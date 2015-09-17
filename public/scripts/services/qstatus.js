@@ -71,6 +71,10 @@ var acceptAppointment = function(token) {
 	    return $http.get(url).success(function(data) { });
 	};
 		
+ var cancelBooking = function(cell,reference) {
+	    var url = 'api/appointment/cancel/' + cell + '/' +  reference;
+	    return $http.get(url).success(function(data) { });
+	};
 		
 	return {
     getStatus: getStatus,
@@ -86,6 +90,7 @@ var acceptAppointment = function(token) {
     isAcceptingAppointment: isAcceptingAppointment,
     retrieveAll: retrieveAll,
     update_counter: update_counter,
-    clearAllBookings: clearAllBookings
+    clearAllBookings: clearAllBookings,
+    cancelBooking: cancelBooking
   };
 }]);
