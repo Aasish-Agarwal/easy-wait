@@ -21,7 +21,7 @@
                 vm.auth_username = $cookies.get('auth_username');
                 vm.server_counter = 0;
                 vm.current_bookings = {};
-                vm.isAcceptingBookings = 0;
+                //vm.isAcceptingBookings = 0;
 
                 if (! vm.registered_mobile ) {
                 	vm.registered_mobile = '';
@@ -114,7 +114,14 @@
             vm.currentBookingStatus = function() {
             	qstatus.isAcceptingAppointment(vm.registered_mobile).then(function(results) {
             		vm.isAcceptingBookings = results.data.bookings_open;
-                    console.log(results);
+                    if ( vm.isAcceptingBookings == "0") {
+                    	vm.isAcceptingBookings = '';
+                    	vm.isNotAcceptingBookings = 'Closed';
+                    } else {
+                    	vm.isAcceptingBookings = 'Open';
+                    	vm.isNotAcceptingBookings = '';
+                    }
+            		console.log(results);
                 }, function(error) {
                   console.log(error);
                 });

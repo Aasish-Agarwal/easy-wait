@@ -71,16 +71,23 @@
 
 	      		<div class="col-md-4">
 					<h3>Current Bookings: </h3>
-		      		<div ng-repeat="counter in vm.booked_counters"> 
-						  <table  border="1">
-						  <tr>
-						  
+
+					
+					<table class="table table-striped" >
+					 	<thead>
+					  <tr>
+					     <th>Cancel</th>
+					     <th>Reference</th>
+					     <th>Counter</th>
+					  </tr>
+					 </thead>
+ 					  <tbody ng:repeat="counter in vm.booked_counters">
 						  <td><button class="glyphicon glyphicon-remove btn btn-danger" ng-click="vm.cancelBooking(vm.mobile, vm.current_bookings[counter] , counter)"></button></td>
-						  <td class="bookedbox">{{vm.current_bookings[counter]}}</td>
-						  <td class="bookedbox">{{counter}}</td>
-							</tr>
-						 </table>
-					</div>
+						  <td>{{vm.current_bookings[counter]}}</td>
+						  <td>{{counter}}</td>
+					    </tbody>
+					</table>			
+			      	
 
 		      		<div ng-show="vm.isAcceptingBookings">
 						<form class="navbar-form">
@@ -97,25 +104,36 @@
 	      		
 	      		<div class="col-md-4">
 			      	<h3>Subscription History: </h3>
-			      		<div ng-repeat="mobile in vm.subscribed_numbers"> 
-						  <table  border="1">
+
+					<table class="table table-striped" >
+					 	<thead>
+					  <tr>
+					     <th>Cancel</th>
+					     <th>Reference</th>
+					     <th>Counter</th>
+					  </tr>
+					 </thead>
+ 					  <tbody ng:repeat="mobile in vm.subscribed_numbers">
 						  <tr>
 						  
 						  <td><button class="glyphicon glyphicon-remove btn btn-danger" ng-click="vm.removeSubscription(mobile)"></button></td>
-						  <td class="bookedbox">{{ vm.vendor_info_map[mobile] }}</td>
+						  <td >{{ vm.vendor_info_map[mobile] }}</td>
 						  <td><button class="glyphicon glyphicon-ok btn btn-success" ng-click="vm.setMobile(mobile)"></button></td>
 						  </tr>
-						 </table>
-							
-						</div>
-
+ 					  </tbody>
+					</table>			
+			      	
 	      			<h3>Subscribe: </h3>
 	                <form class="navbar-form">
 	                    <label>Phone Number with country code</label><br>
-	                	<input type="number" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13>
+	                	<input type="number" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
 	                    </input>
 	                    <button class="btn btn-primary " ng-click="vm.setMobile(vm.mobile_to_subscribe)">Subscribe</button>
 					</form>
+					
+							
+				</div>
+
 						
 				</div>
 	      	</div>

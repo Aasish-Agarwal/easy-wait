@@ -99,7 +99,6 @@
               }, function(error) {
                 console.log(error);
               });
-            	vm.currentBookingStatus(vm.mobile);
             }              
 
             vm.setVendorName = function() {
@@ -111,28 +110,34 @@
             }
             
             vm.setMobile  = function( mobile ) {
-                vm.subscribed_numbers[mobile] = mobile; 
-                vm.currentBookingStatus(mobile);
-                
-                if ( vm.all_bookings[mobile] ) {
-                	vm.current_bookings = vm.all_bookings[mobile] ;
-                	vm.booked_counters = Object.keys(vm.current_bookings);
-                } else {
-                	vm.all_bookings[mobile] = {};
-                }
-                
+                vm.mobile_to_subscribe = '';
+
+               
                 qstatus.getvendorinfo(mobile).then(function(results) {
-                	vm.vendor_info_map[mobile] = results.data.name;
-                  console.log(results);
-	            }, function(error) {
+                	if ( results.data.found == 0 ) {
+                    	vm.vendor_info_map[mobile] = results.data.name;
+                        vm.subscribed_numbers[mobile] = mobile; 
+                        vm.mobile = mobile;
+                        vm.getStatus();
+
+                        if ( vm.all_bookings[mobile] ) {
+                        	vm.current_bookings = vm.all_bookings[mobile] ;
+                        	vm.booked_counters = Object.keys(vm.current_bookings);
+                        } else {
+                        	vm.all_bookings[mobile] = {};
+                        }
+
+                        $cookies.put('vendor_info_map',angular.toJson(vm.vendor_info_map), {'expires': vm.expireDate});
+                        $cookies.put('subscribed_numbers',angular.toJson(vm.subscribed_numbers), {'expires': vm.expireDate});
+                        $cookies.put('last_subscription',mobile, {'expires': vm.expireDate});
+                	} else {
+                		alert("Publisher not registered");
+                	}
+                	console.log(results);
+                }, function(error) {
 	                console.log(error);
 	            });
                 
-                $cookies.put('vendor_info_map',angular.toJson(vm.vendor_info_map), {'expires': vm.expireDate});
-                $cookies.put('subscribed_numbers',angular.toJson(vm.subscribed_numbers), {'expires': vm.expireDate});
-                $cookies.put('last_subscription',mobile, {'expires': vm.expireDate});
-                vm.mobile = mobile;
-                vm.getStatus();
             }    
 
             vm.register = function() {
@@ -171,6 +176,19 @@
             
             vm.addBooking = function(mobile,reference,position) {
             	vm.preferred_position='';
+            	
+            	if (typeof reference == 'undefined') {
+            		alert("Booking requires a reference");
+            		return;
+            	}
+            	
+            	if (typeof position == 'undefined') {
+            		position = 0;
+            	}
+            	if (position == 'null') {
+            		position = 0;
+            	}
+
             	qstatus.bookAppointmemt(mobile,reference,position).then(function(results) {
                     console.log(results);
                     if ( results.data.status > 0 ) {

@@ -41,14 +41,13 @@ class VendorController extends Controller
     	// close cURL resource, and free up system resources
     	curl_close($ch);
 
-    	#$password = '111';
     	$otp = $password;
     	$vendor = new Vendor();
-    	$vendor->signup($cell, $otp);    	 
-    	
-    	return 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from - ' . $otp;
+    	$vendor->signup($cell, $otp);
+
+    	return 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from' ;
     }
-    
+
     /**
      * Register a cell number and respond with a token to be used as its identifier.
      *
@@ -60,8 +59,8 @@ class VendorController extends Controller
     	$token = $vendor -> matchOTP($cell,$otp);
     	return($token);
     }
-    
-    
+
+
     /**
      * Register a cell number and respond with a token to be used as its identifier.
      *
@@ -72,9 +71,9 @@ class VendorController extends Controller
     	$vendor = new Vendor();
     	return $vendor -> setName($token, $name);
     }
-    
-    
-    
+
+
+
     /**
      * Register a cell number and respond with a token to be used as its identifier.
      *
@@ -85,12 +84,12 @@ class VendorController extends Controller
     	$vendor = new Vendor();
     	return $vendor -> getPublicInfo($cell);
     }
-    
-    
+
+
     /**
      * Update the counter associated with a token
      * Return -1 if the counter is <0 and >999
-     * 
+     *
      * @return Response
      */
     public function updateCounter($token,$counter){
@@ -99,10 +98,10 @@ class VendorController extends Controller
     	if ($counter < 0 ||  $counter >999 ) {
     		return($retval);
     	}
-    	
+
     	$vendor = new Vendor();
     	$retval = $vendor -> updateCounter($token,$counter);
-    	
+
     	return ($retval);
     }
 
@@ -111,20 +110,20 @@ class VendorController extends Controller
     	$retval = $vendor -> setNextCounter($token);
     	return ($retval);
     }
-    
+
     public function resetCounter($token){
     	$vendor = new Vendor();
     	$retval = $vendor -> resetCounter($token);
     	return ($retval);
     }
-    
+
     public function getCounter($cell){
     	$vendor = new Vendor();
     	$retval = $vendor -> getCounter($cell);
     	return ($retval);
     }
-    
-    
+
+
     /**
      * Show the form for creating a new resource.
      *

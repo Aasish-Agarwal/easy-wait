@@ -28,35 +28,35 @@
 <style type='text/css'>
 
 .bookedbox {
-  width: 350px;
-  height: 40px;
+  width: 50%;
   color: white;
+  font-size: 2em;
   background-color: grey;
 	text-align: center;
 }
 
-.counterbox {
+.bookedbox_server {
+  width: 20%;
   color: white;
-  text-align: center;
+  font-size: 1em;
+  background-color: #428bca;
+	text-align: center;
 }
 
-.counterbox td {
-  width: 30px;
-  background-color: black;
-}
-
-.counterbox td h1 {
-  width: 140px;
-  background-color: green;
+.qstatus {
+  color: white;
+  width: 30%;
+  background-color: #428bca;
+	text-align: center;
 }
 
 </style>
-		
+
    </head>
    <body ng-app="easywait" ng-controller="QueuePublisher as vm" data-ng-init="vm.init()">
 
    <div id="navbar"></div>
-   
+
       <!-- Grid System
       ====================================== -->
       <div class="container">
@@ -64,44 +64,47 @@
       	<h3></h3>
       	</div>
       	<div class="row">
-			<div class="well col-md-3">
-		                	{{ vm.auth_username }} - {{ vm.registered_mobile }}
-      					<div class="counterbox">
-		                	<table >
-		                	<tr>
-		                	<td><button class="glyphicon glyphicon-stop btn btn-danger" ng-click="vm.stoplocal()"></button></td>
-		                	<td><h1>{{vm.counter}}<h1></td>
-		                	<td>{{vm.server_counter}}</td>
-		                	<td><button class="glyphicon glyphicon-forward btn btn-danger" ng-click="vm.nextlocal()"></button></td>
-		                	</tr>
-		                	</table>
-		                </div>
-			</div>
+
+      	<div class="well col-md-3">
+      	{{ vm.auth_username }} - {{ vm.registered_mobile }}
+      	<table >
+			  <tr>
+			  <td ><button type="button" class="btn btn-danger btn-lg" ng-click="vm.stoplocal()"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></button></td>
+			  <td class="bookedbox">{{vm.counter}}</td>
+			  <td class="bookedbox_server ">{{vm.server_counter}}</td>
+			  <td ><button type="button" class="btn btn-primary btn-lg" ng-click="vm.nextlocal()"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button></td>
+			  </tr>
+		</table>
+
+    </div>
+			
+    
 			<div class="col-md-4">
-			          <form class="navbar-form">
-			          	<button class="btn btn-primary btn-lg btn-block" ng-hide="vm.isAcceptingBookings" ng-click="vm.acceptAppointments()">Accept Appointments</button>
-			          	<button class="btn btn-danger btn-lg btn-block" ng-show="vm.isAcceptingBookings" ng-click="vm.closeAppointments()">Close Appointments</button>
-			          </form>
-			</div>
-			<div class="col-md-4">
-				<h3>Current Bookings:</h3>
-					<div ng-repeat="booking in vm.current_bookings"> 
-						  <table  border="1">
-						  <tr>
-						  
-						  <td class="bookedbox">{{booking.reference}}</td>
-						  <td class="bookedbox">{{booking.counter}}</td>
-							</tr>
-						 </table>
-	                	
-	                </div>
-			        <button class="btn btn-danger btn-lg btn-block" ng-click="vm.clearAllBookings()">Clear All Appointments</button>
+<h3>Appointments:<span class="label label-danger">{{vm.isNotAcceptingBookings}}</span> <span class="label label-success">{{vm.isAcceptingBookings}}</span></h3>			    
+					<table class="table table-striped" >
+					 	<thead>
+					  <tr>
+					     <th>Reference</th>
+					     <th>Counter</th>
+					  </tr>
+					 </thead>
+ 					  <tbody ng:repeat="booking in vm.current_bookings">
+					    <tr><td>{{booking.reference}}</td><td>{{booking.counter}}</td></tr>
+					  </tbody>
+					</table>			
+			
+<ul class="nav nav-pills" role="tablist">
+  <li role="presentation"><button type="button" class="btn btn-danger btn-small"   ng-click="vm.clearAllBookings()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove All</button></li>
+<li role="presentation"><button type="button" class="btn btn-danger btn-small" ng-click="vm.closeAppointments()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Close</button></li>
+  <li role="presentation"><button type="button" class="btn btn-success btn-small"  ng-click="vm.acceptAppointments()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Open</button></li>
+</ul>
+					
+			    
+			    
 			</div>
 		</div>
-		
       </div>
 
-      
       <!-- Include all compiled plugins (below), or include individual files
             as needed -->
 	  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -115,7 +118,7 @@
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/services/qstatus.js"></script>
     <script type="text/javascript" src="scripts/controllers/QueuePublisher.js"></script>
-    	  
+
 	  </body>
 </html>
 

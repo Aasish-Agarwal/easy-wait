@@ -39,7 +39,7 @@
       	</div>
 
       	<div class="row">
-      	      		<div class="col-xs-3">
+      	      		<div class="col-md-3">
 		                <form class="navbar-form">
 							<input class="form-control" type="text" ng-model="vm.name_to_publish" placeholder="Name">
 		                	<p>
@@ -51,13 +51,11 @@
 		                    </input>
 		                    <button class="btn btn-primary" ng-click="vm.verifyOTP()">Verify</button>
 						</form>
-      	      		</div>
+			<h4>{{vm.message}}</h4>
+						
+					</div>
 		</div>
       	
-      	<div class="row">
-			<h4>{{vm.message}}</h4>
-		</div>
-		
       </div>
 
       
