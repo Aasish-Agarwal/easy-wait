@@ -185,7 +185,7 @@
             	if (typeof position == 'undefined') {
             		position = 0;
             	}
-            	if (position == 'null') {
+            	if ( !position ) {
             		position = 0;
             	}
 
