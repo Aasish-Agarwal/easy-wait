@@ -119,6 +119,7 @@
                         vm.subscribed_numbers[mobile] = mobile; 
                         vm.mobile = mobile;
                         vm.getStatus();
+                        vm.currentBookingStatus(mobile);
 
                         if ( vm.all_bookings[mobile] ) {
                         	vm.current_bookings = vm.all_bookings[mobile] ;
@@ -227,6 +228,15 @@
             vm.currentBookingStatus = function(mobile) {
             	qstatus.isAcceptingAppointment(mobile).then(function(results) {
             		vm.isAcceptingBookings = results.data.bookings_open;
+
+                    if ( vm.isAcceptingBookings == "0") {
+                    	vm.AppointmentsOpen = '';
+                    	vm.AppointmentsClosed = 'Closed';
+                    } else {
+                    	vm.AppointmentsOpen = 'Open';
+                    	vm.AppointmentsClosed = '';
+
+                    }
                     console.log(results);
                 }, function(error) {
                   console.log(error);

@@ -60,6 +60,9 @@
 	      	<div class="row">
 	
 	      		<div class="col-md-4">
+	      		
+	      		
+	      		
 					<h3>Queue Status: </h3>
 	      				<form class="navbar-form">
 	      					<div class="bookedbox">
@@ -70,8 +73,10 @@
 	      		</div>
 
 	      		<div class="col-md-4">
-					<h3>Current Bookings: </h3>
-
+					<h3>Appointments:
+					<span class="label label-danger">{{vm.AppointmentsClosed}}</span> 
+					<span class="label label-success">{{vm.AppointmentsOpen}}</span></h3>			    
+	      		
 					
 					<table class="table table-striped" >
 					 	<thead>
@@ -103,14 +108,14 @@
 	      		
 	      		
 	      		<div class="col-md-4">
-			      	<h3>Subscription History: </h3>
+			      	<h3>Subscriptons: </h3>
 
 					<table class="table table-striped" >
 					 	<thead>
 					  <tr>
-					     <th>Cancel</th>
-					     <th>Reference</th>
-					     <th>Counter</th>
+					     <th>Remove</th>
+					     <th>Queue Of</th>
+					     <th>Watch</th>
 					  </tr>
 					 </thead>
  					  <tbody ng:repeat="mobile in vm.subscribed_numbers">
@@ -123,9 +128,7 @@
  					  </tbody>
 					</table>			
 			      	
-	      			<h3>Subscribe: </h3>
 	                <form class="navbar-form">
-	                    <label>Phone Number with country code</label><br>
 	                	<input type="number" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
 	                    </input>
 	                    <button class="btn btn-primary " ng-click="vm.setMobile(vm.mobile_to_subscribe)">Subscribe</button>

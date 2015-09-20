@@ -103,12 +103,16 @@
             }
 
             vm.clearAllBookings  = function() {
-            	qstatus.clearAllBookings(vm.auth_token).then(function(results) {
-                    console.log(results);
-                    vm.retrieveAll();
-                }, function(error) {
-                  console.log(error);
-                });
+            	bootbox.confirm("Do you really want to remove all bookings?", function(result) {
+            		if ( result == true ) {
+                    	qstatus.clearAllBookings(vm.auth_token).then(function(results) {
+                            console.log(results);
+                            vm.retrieveAll();
+                        }, function(error) {
+                          console.log(error);
+                        });
+            		}
+            	}); 
             }
 
             vm.currentBookingStatus = function() {
