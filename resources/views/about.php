@@ -37,9 +37,7 @@
       	<div class="row">
       	<h3></h3>
       	</div>
-      	<div class="row">
-      		<div id="about"></div>
-     	</div>
+      	<div id="about"></div>
 
       </div>
       
