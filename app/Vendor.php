@@ -228,6 +228,8 @@ class Vendor extends Model
     	if ( count($vndr) > 0 ) {
 				$first = $vndr[0];
 				$retval['counter'] = $vndr[0]->counter;
+				$retval['bookings_open'] = $vndr[0]->accepting_appointments;
+    			$retval['qsize'] = $vndr[0]->next_available_counter;
     	}
     	return $retval;
     }

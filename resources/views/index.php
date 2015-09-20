@@ -75,8 +75,9 @@
 	      		<div class="col-md-4">
 					<h3>Appointments:
 					<span class="label label-danger">{{vm.AppointmentsClosed}}</span> 
-					<span class="label label-success">{{vm.AppointmentsOpen}}</span></h3>			    
-	      		
+					<span class="label label-success">{{vm.AppointmentsOpen}}</span>			    
+					<span class="label label-primary">Next: {{vm.qsize}} </span></h3>			    
+					
 					
 					<table class="table table-striped" >
 					 	<thead>

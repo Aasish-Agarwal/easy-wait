@@ -32,6 +32,7 @@
                 vm.expireDate = new Date();
                 vm.expireDate.setDate(vm.expireDate.getDate() + 365);
                 vm.isAcceptingBookings = 0;
+                vm.qsize = 0;
                 
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
@@ -40,13 +41,6 @@
                 	vm.all_bookings = {};
                 } 
                 
-                
-                if (! vm.mobile ) {
-                	vm.mobile = '';
-                } else {
-                	vm.currentBookingStatus(vm.mobile);
-                }
-
                 if (! vm.subscribed_numbers ) {
                 	vm.subscribed_numbers = {};
                 }
@@ -94,6 +88,17 @@
             	vm.message = '' ;
             	qstatus.getStatus(vm.mobile).then(function(results) {
         		  vm.counter = results.data.counter;
+        		  
+                  vm.isAcceptingBookings = results.data.bookings_open;
+                  vm.qsize = results.data.qsize;
+                  if ( vm.isAcceptingBookings == "0") {
+                  	vm.AppointmentsOpen = '';
+                  	vm.AppointmentsClosed = 'Closed';
+                  } else {
+                  	vm.AppointmentsOpen = 'Open';
+                  	vm.AppointmentsClosed = '';
+                  }
+
         		  $timeout(vm.getStatus, 60000);
                   console.log(results);
               }, function(error) {
@@ -119,7 +124,6 @@
                         vm.subscribed_numbers[mobile] = mobile; 
                         vm.mobile = mobile;
                         vm.getStatus();
-                        vm.currentBookingStatus(mobile);
 
                         if ( vm.all_bookings[mobile] ) {
                         	vm.current_bookings = vm.all_bookings[mobile] ;
@@ -178,14 +182,11 @@
             vm.addBooking = function(mobile,reference,position) {
             	vm.preferred_position='';
             	
-            	if (typeof reference == 'undefined') {
+            	if ( ! reference ) {
             		alert("Booking requires a reference");
             		return;
             	}
             	
-            	if (typeof position == 'undefined') {
-            		position = 0;
-            	}
             	if ( !position ) {
             		position = 0;
             	}
@@ -235,7 +236,6 @@
                     } else {
                     	vm.AppointmentsOpen = 'Open';
                     	vm.AppointmentsClosed = '';
-
                     }
                     console.log(results);
                 }, function(error) {
