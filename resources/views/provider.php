@@ -80,7 +80,11 @@
 			
     
 			<div class="col-md-4">
-<h3>Appointments:<span class="label label-danger">{{vm.isNotAcceptingBookings}}</span> <span class="label label-success">{{vm.isAcceptingBookings}}</span></h3>			    
+<h3>Appointments:
+<span class="label label-danger">{{vm.isNotAcceptingBookings}}</span> 
+<span class="label label-success">{{vm.isAcceptingBookings}}</span>
+<span class="label label-primary">Next: {{vm.qsize}}</span>
+</h3>			    
 					<table class="table table-striped" >
 					 	<thead>
 					  <tr>
@@ -94,9 +98,10 @@
 					</table>			
 			
 <ul class="nav nav-pills" role="tablist">
-  <li role="presentation"><button type="button" class="btn btn-danger btn-small"   ng-click="vm.clearAllBookings()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove All</button></li>
-<li role="presentation"><button type="button" class="btn btn-danger btn-small" ng-click="vm.closeAppointments()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Close</button></li>
-  <li role="presentation"><button type="button" class="btn btn-success btn-small"  ng-click="vm.acceptAppointments()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Open</button></li>
+  <li role="presentation"><button type="button" class="btn btn-danger btn-small"   ng-click="vm.clearAllBookings()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </button></li>
+  <li role="presentation"><button type="button" class="btn btn-danger btn-small" ng-click="vm.closeAppointments()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button></li>
+  <li role="presentation"><button type="button" class="btn btn-success btn-small"  ng-click="vm.acceptAppointments()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </button></li>
+  <li role="presentation"><button type="button" class="btn btn-primary btn-small"  ng-click="vm.retrieveAll()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></li>
 </ul>
 					
 			    
@@ -120,6 +125,7 @@
     <script type="text/javascript" src="scripts/controllers/QueuePublisher.js"></script>
 
     <script type="text/javascript" src="js/bootbox.min.js"></script>
+
     
 	  </body>
 </html>

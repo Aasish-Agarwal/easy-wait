@@ -19,10 +19,16 @@
             	vm.registered_mobile = $cookies.get('registered_mobile');
                 vm.auth_token = $cookies.get('auth_token');
                 vm.auth_username = $cookies.get('auth_username');
-                vm.server_counter = 0;
+                vm.counter = $cookies.get('current_counter');
                 vm.current_bookings = {};
-                //vm.isAcceptingBookings = 0;
 
+                vm.expireTomorrow = new Date();
+                vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
+                
+                if (! vm.counter ) {
+                	vm.counter = 0;
+                }
+                
                 if (! vm.registered_mobile ) {
                 	vm.registered_mobile = '';
                 }
@@ -34,18 +40,17 @@
                 }
 
                 vm.getStatus();
-                vm.counter = vm.server_counter;
                 vm.update();
                 vm.currentBookingStatus();
          	}
 
           // on the vm.timeentries array
             vm.getStatus = function() {
-                vm.auth_token = $cookies.get('auth_token');
             	vm.message = '' ;
             	qstatus.getStatus(vm.registered_mobile).then(function(results) {
             	 vm.server_counter = results.data.counter;
-                  console.log(results);
+                 vm.qsize = results.data.qsize;
+            	 console.log(results);
                   vm.retrieveAll();
               }, function(error) {
                 console.log(error);
@@ -54,22 +59,13 @@
 
             vm.stoplocal = function() {
             	vm.counter = 0;
+                $cookies.put('current_counter',vm.counter, {'expires': vm.expireTomorrow});
             }
             vm.nextlocal = function() {
-            	vm.counter = vm.counter + 1;
+            	vm.counter = parseInt(vm.counter) + 1;
+                $cookies.put('current_counter',vm.counter, {'expires': vm.expireTomorrow});
             }
             
-            vm.stop = function() {
-                vm.auth_token = $cookies.get('auth_token');
-            	vm.message = '' ;
-            	qstatus.stop(vm.auth_token).then(function(results) {
-                    console.log(results);
-                    vm.getStatus();
-                }, function(error) {
-                  console.log(error);
-                });
-            }
-
             vm.retrieveAll = function() {
             	vm.message = '' ;
             	qstatus.retrieveAll(vm.auth_token,vm.counter).then(function(results) {
@@ -80,15 +76,6 @@
                 });
             }
 
-            vm.next = function() {
-            	vm.message = '' ;
-            	qstatus.next(vm.auth_token).then(function(results) {
-                    console.log(results);
-                    vm.getStatus();
-                }, function(error) {
-                  console.log(error);
-                });
-            }
             vm.update = function() {
                 if ( vm.counter != vm.server_counter ) {
 	            	vm.message = '' ;
@@ -99,7 +86,7 @@
 	                  console.log(error);
 	                });
                 }
-      		   $timeout(vm.update, 10000);
+      		   $timeout(vm.update, 1000);
             }
 
             vm.clearAllBookings  = function() {
