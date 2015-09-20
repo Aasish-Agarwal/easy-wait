@@ -23,8 +23,6 @@
 		$(function(){
 			$("#navbar").load("nav.html");
 			$("#about").load("about-easywait.html");
-			$("#provider").load("provider.html");
-						
 		});
 		</script>
 
@@ -40,10 +38,8 @@
       	<h3></h3>
       	</div>
       	<div class="row">
-		        <div class="tab-pane" id="tab_about">
-      				<div id="about"></div>
-		        </div>
-      	</div>
+      		<div id="about"></div>
+     	</div>
 
       </div>
       
