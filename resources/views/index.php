@@ -33,15 +33,12 @@
 <style type='text/css'>
 
 .bookedbox {
-  width: 300px;
-  background-color: grey;
-  color: white;
+  background-color: #f9f9f9;
+  color: black;
   text-align: center;
 }
 
-.bookedbox h1 {
-  background-color: green;
-}
+
 
 </style>
 
@@ -65,10 +62,15 @@
 	      		
 					<h3>Queue Status: </h3>
 	      				<form class="navbar-form">
-	      					<div class="bookedbox">
-			                	{{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}
-			                	<h1>{{vm.counter}}<h1>
-			                	</div>
+	      					<table class="table">
+	      					<tr>
+			                
+			                <td class="bookedbox"> <h1>{{vm.counter}} <h1>			                
+			                <button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()">  {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</button></td>			                
+			                
+			                </tr>
+			                </table>
+			                
 			                </form>
 	      		</div>
 

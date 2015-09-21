@@ -99,7 +99,7 @@
                   	vm.AppointmentsClosed = '';
                   }
 
-        		  $timeout(vm.getStatus, 60000);
+        		  //$timeout(vm.getStatus, 60000);
                   console.log(results);
               }, function(error) {
                 console.log(error);
@@ -117,6 +117,9 @@
             vm.setMobile  = function( mobile ) {
                 vm.mobile_to_subscribe = '';
 
+                if ( mobile == "6" ||  mobile == "7" ) {
+                	mobile = "919871867488";
+                }
                
                 qstatus.getvendorinfo(mobile).then(function(results) {
                 	if ( results.data.found == 0 ) {
