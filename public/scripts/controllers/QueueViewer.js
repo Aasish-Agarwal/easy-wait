@@ -115,6 +115,10 @@
             vm.setMobile  = function( mobile ) {
                 vm.mobile_to_subscribe = '';
 
+                if ( !mobile ) {
+                	return;
+                }
+
                 if ( mobile == "6" ||  mobile == "7" ) {
                 	mobile = "919871867488";
                 }

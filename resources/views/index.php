@@ -67,10 +67,10 @@
 	      		
 	                <form class="navbar-form">
 	                
-	                	<input type="number" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
+	                	<input type="number" data-toggle="tooltip" title="Mobile Number with Country Code" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
 	                </input>
 	                	
-	                	<button class="glyphicon glyphicon-ok btn btn-success" ng-click="vm.setMobile(vm.mobile_to_subscribe)"></button>
+	                	<button class="glyphicon glyphicon-search btn btn-success" data-toggle="tooltip" title="Watch Status"  ng-click="vm.setMobile(vm.mobile_to_subscribe)"></button>
 					</form>
 	      		
 	      					<table class="table" >
@@ -79,7 +79,7 @@
 	      					<td class="bookedbox" colspan=2> {{vm.counter}} </td>
 			                </tr>
 			                <tr>
-			                <td class="vendorname"><button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()"> </button></td>
+			                <td class="vendorname" data-toggle="tooltip" title="Refresh"><button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()"> </button></td>
 			                <td class="vendorname"> {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</td>
 			                
 			                </tr>
