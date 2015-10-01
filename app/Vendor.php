@@ -101,10 +101,12 @@ class Vendor extends Model
     {
     	$retval = [];
     	$retval['code'] = 0;
+    	$tmnow = time();
+    	 
     	try {
 	    	\DB::table($this->table)
 	    	->where('token', $token)
-	    	->update(['counter' => $counter]);
+	    	->update(['counter' => $counter, 'updtm' => $tmnow]);
     	} catch ( \Exception $e) {
     		$retval['code'] = $e->errorInfo[0];
     	}

@@ -36,8 +36,14 @@
   background-color: #f9f9f9;
   color: black;
   text-align: center;
+  font-size: 300%;
 }
 
+.vendorname {
+  background-color: #f9f9f9;
+  color: black;
+  text-align: center;
+}
 
 
 </style>
@@ -59,20 +65,28 @@
 	      		<div class="col-md-4">
 	      		
 	      		
+	                <form class="navbar-form">
+	                
+	                	<input type="number" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
+	                </input>
+	                	
+	                	<button class="glyphicon glyphicon-ok btn btn-success" ng-click="vm.setMobile(vm.mobile_to_subscribe)"></button>
+					</form>
 	      		
-					<h3>Queue Status: </h3>
-	      				<form class="navbar-form">
-	      					<table class="table">
+	      					<table class="table" >
 	      					<tr>
 			                
-			                <td class="bookedbox"> <h1>{{vm.counter}} <h1>			                
-			                <button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()">  {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</button></td>			                
+	      					<td class="bookedbox" colspan=2> {{vm.counter}} </td>
+			                </tr>
+			                <tr>
+			                <td class="vendorname"><button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()"> </button></td>
+			                <td class="vendorname"> {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</td>
 			                
 			                </tr>
 			                </table>
 			                
-			                </form>
-	      		</div>
+			                
+			       </div>
 
 	      		<div class="col-md-4">
 					<h3>Appointments:
@@ -131,22 +145,23 @@
  					  </tbody>
 					</table>			
 			      	
-	                <form class="navbar-form">
-	                	<input type="number" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
-	                    </input>
-	                    <button class="btn btn-primary " ng-click="vm.setMobile(vm.mobile_to_subscribe)">Subscribe</button>
-					</form>
 					
 							
 				</div>
 
 						
 				</div>
-	      	</div>
-
+	   
+	   
 	    <div class="row">
+	      		<div class="col-md-4">
 			<h4>{{vm.message}}</h4>
-		</div>
+			</div>
+		</div>	   
+	   
+	   </div>
+
+
 		
       </div>
 

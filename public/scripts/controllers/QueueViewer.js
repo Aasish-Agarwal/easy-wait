@@ -8,19 +8,17 @@
         .module('easywait')
         .controller('QueueViewer', QueueViewer);
 
-    function QueueViewer(qstatus, $scope, $timeout, $cookies) {
+    function QueueViewer(qstatus, $timeout, $cookies) {
 
             // vm is our capture variable
             var vm = this;
-                
-            vm.mytimeout = null;
-            
             vm.init = function () {
                 // Initialize the counter & mobile.
                 vm.counter = '';
                 vm.message = '';
                 vm.token='';
                 vm.name_to_publish = '';
+                vm.country_code = 91;
 
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
