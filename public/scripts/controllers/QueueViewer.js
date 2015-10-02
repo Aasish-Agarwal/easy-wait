@@ -19,6 +19,8 @@
                 vm.token='';
                 vm.name_to_publish = '';
                 vm.country_code = 91;
+                vm.update_rate = '';
+                vm.last_updated = '';
 
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
@@ -86,7 +88,16 @@
             	vm.message = '' ;
             	qstatus.getStatus(vm.mobile).then(function(results) {
         		  vm.counter = results.data.counter;
-        		  
+
+        		  if (vm.counter > 0 ) {
+                      vm.update_rate = Math.round((results.data.updtm - results.data.starttm)/60/vm.counter);
+        		  } else {
+        			  vm.update_rate = '-';
+        		  }
+
+        		  vm.last_updated = Math.round((results.data.tmnow - results.data.updtm)/60);
+                  
+                  
                   vm.isAcceptingBookings = results.data.bookings_open;
                   vm.qsize = results.data.qsize;
                   if ( vm.isAcceptingBookings == "0") {

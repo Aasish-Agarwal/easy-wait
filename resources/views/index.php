@@ -75,12 +75,16 @@
 	      		
 	      					<table class="table" >
 	      					<tr>
-			                
 	      					<td class="bookedbox" colspan=2> {{vm.counter}} </td>
 			                </tr>
-			                <tr>
-			                <td class="vendorname" data-toggle="tooltip" title="Refresh"><button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()">  {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</button></td>
+
+	      					<tr>
+	      					<td class="vendorname" >{{vm.update_rate}} min each</td>
+	      					<td class="vendorname" >{{vm.last_updated}} min ago</td>
+	      					</tr>
 			                
+			                <tr>
+			                <td colspan=2 class="vendorname" data-toggle="tooltip" title="Refresh"><button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()">  {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</button></td>
 			                </tr>
 			                </table>
 			                

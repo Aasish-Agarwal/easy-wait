@@ -232,6 +232,7 @@ class Vendor extends Model
     			$retval['qsize'] = $vndr[0]->next_available_counter;
 				$retval['starttm'] = $vndr[0]->starttm;
     			$retval['updtm'] = $vndr[0]->updtm;
+    			$retval['tmnow'] = time();
     	}
     	return $retval;
     }
