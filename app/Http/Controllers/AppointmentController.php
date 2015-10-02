@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Vendor;
 use App\Appointments;
+use App\Settings;
 
 class AppointmentController extends Controller
 {
@@ -58,11 +59,26 @@ class AppointmentController extends Controller
 			return 	$retval;
 		} else {
 			$booking_successful = 0;
-			while ( ! $booking_successful ) {
-				$next_counter = $vendor->getNextAvailableCounter($cell);
+			$initial_empty_positions = Settings::get($cell, Settings::INITIAL_EMPTY_POSITIONS);
+			$periodic_empty_position = Settings::get($cell, Settings::PERIODIC_EMPTY_POSITION);
 				
-				if ($counter>$next_counter ) 
+			$next_counter = $vendor->getNextAvailableCounter($cell);
+				
+			if ($next_counter <= $initial_empty_positions) {
+					$this->reset($cell);
+					$vendor->resetNextAvailableCounter($cell, $initial_empty_positions + 1);
+					$next_counter = $initial_empty_positions + 1;
+			}
+
+			while ( ! $booking_successful ) {
+				if ($counter > $next_counter ) 
 				{
+					if ( $periodic_empty_position > 0  
+						&& ($counter % $periodic_empty_position) == 0 ) {
+						$apointment->book($cell, '* FREE *-- ' .  $counter , $counter);
+						$counter++;
+					}
+					
 					if ( $apointment->book($cell, $reference, $counter) > 0  )
 					{
 						$booking_successful = 1;
@@ -75,15 +91,21 @@ class AppointmentController extends Controller
 					}
 				} else 
 				{
-					$vendor->setNextAvailableCounter($cell);
-					$next_counter = $vendor->getNextAvailableCounter($cell);
-					if ( $apointment->book($cell, $reference, $next_counter-1) > 0  )
+					if ( $periodic_empty_position > 0  
+						&& ($next_counter % $periodic_empty_position) == 0 ) {
+						$vendor->setNextAvailableCounter($cell);
+						$apointment->book($cell, '* FREE *-- ' .  $next_counter , $next_counter);
+						$next_counter = $vendor->getNextAvailableCounter($cell);
+					}
+					if ( $apointment->book($cell, $reference, $next_counter) > 0  )
 					{
 						$booking_successful = 1;
-						$retval['counter'] = $next_counter-1;
+						$retval['counter'] = $next_counter;
 						$retval['status'] = 1;
 						$retval['srvr_msg'] = 'Booking Successful';
 					}
+					$vendor->setNextAvailableCounter($cell);
+					$next_counter = $vendor->getNextAvailableCounter($cell);
 				}
 			}			
 		}
@@ -131,7 +153,7 @@ class AppointmentController extends Controller
 		# Get the cell number
 		$vendor = new Vendor();
 		$cell = $vendor->getCellNumber($token);
-		$vendor->resetNextAvailableCounter($cell);
+		$vendor->resetNextAvailableCounter($cell,Settings::get($cell, Settings::INITIAL_EMPTY_POSITIONS) + 1);
 		
 		# Remove all appointments against the cell
 		$apointment = new Appointments();

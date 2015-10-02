@@ -188,12 +188,12 @@ class Vendor extends Model
      *
      * @var array
      */
-    public function resetNextAvailableCounter($cell)
+    public function resetNextAvailableCounter($cell,$counter)
     {
     	$retval = [];
     	$retval['code'] = 0;
     	try {
-    		\DB::update('update vendor set next_available_counter = 1 where cell = ?', array($cell));
+    		\DB::update('update vendor set next_available_counter = ? where cell = ?', array($counter,$cell));
     	} catch ( \Exception $e) {
     		$retval['code'] = $e->errorInfo[0];
     	}
