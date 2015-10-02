@@ -104,9 +104,17 @@ class Vendor extends Model
     	$tmnow = time();
     	 
     	try {
-	    	\DB::table($this->table)
-	    	->where('token', $token)
-	    	->update(['counter' => $counter, 'updtm' => $tmnow]);
+    		if ( $counter == 0 ) {
+		    	\DB::table($this->table)
+		    	->where('token', $token)
+		    	->update(['counter' => $counter, 'updtm' => $tmnow , 'starttm' => 0]);
+    		} else {
+    			\DB::table($this->table)
+    			->where('token', $token)
+    			->update(['counter' => $counter, 'updtm' => $tmnow]);
+
+    			\DB::update('update vendor set starttm = updtm where token = ? and starttm = 0', array($token));
+    		}
     	} catch ( \Exception $e) {
     		$retval['code'] = $e->errorInfo[0];
     	}
@@ -123,14 +131,11 @@ class Vendor extends Model
      */
     public function setNextCounter($token) 
     {
-    	$retval = [];
-    	$retval['code'] = 0;
-    	try {
-    		\DB::update('update vendor set counter = counter + 1 where token = ?', array($token));
-    	} catch ( \Exception $e) {
-    		$retval['code'] = $e->errorInfo[0];
-    	}
-    	return($retval);
+    	$vndr = \DB::table($this->table)
+    	->where('token', '=', $token)
+    	->get();
+
+    	return $this->updateCounter($token,$vndr[0]->counter+1);
     }
 
     
@@ -204,14 +209,7 @@ class Vendor extends Model
      */
     public function resetCounter($token)
     {
-    	$retval = [];
-    	$retval['code'] = 0;
-    	try {
-    		\DB::update('update vendor set counter = 0 where token = ?', array($token));
-    	} catch ( \Exception $e) {
-    		$retval['code'] = $e->errorInfo[0];
-    	}
-    	return($retval);
+    	return $this->updateCounter($token,0);
     }
     
     /**
@@ -232,6 +230,8 @@ class Vendor extends Model
 				$retval['counter'] = $vndr[0]->counter;
 				$retval['bookings_open'] = $vndr[0]->accepting_appointments;
     			$retval['qsize'] = $vndr[0]->next_available_counter;
+				$retval['starttm'] = $vndr[0]->starttm;
+    			$retval['updtm'] = $vndr[0]->updtm;
     	}
     	return $retval;
     }
