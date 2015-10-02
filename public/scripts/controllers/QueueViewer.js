@@ -241,6 +241,17 @@
 		             });
             }
             
+            vm.cancelAllBookings = function(mobile) {
+            	bootbox.confirm("Do you really want to remove all bookings?", function(result) {
+            		if ( result == true ) {
+				    	for (var i in vm.booked_counters) {
+				    		var counter = vm.booked_counters[i];
+				    		vm.cancelBooking(mobile, vm.current_bookings[counter] , counter);
+				    	}
+            		}
+            	}); 
+            }            
+            
             
             vm.currentBookingStatus = function(mobile) {
             	qstatus.isAcceptingAppointment(mobile).then(function(results) {

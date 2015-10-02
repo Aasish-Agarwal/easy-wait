@@ -101,7 +101,7 @@
 					<table class="table table-striped" >
 					 	<thead>
 					  <tr>
-					     <th>Cancel</th>
+					     <th><button data-toggle="tooltip" title="Cancel All"  class="glyphicon glyphicon-trash btn btn-danger" ng-click="vm.cancelAllBookings(vm.mobile)"></button> </th>
 					     <th>Reference</th>
 					     <th>Counter</th>
 					  </tr>
@@ -184,7 +184,8 @@
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/services/qstatus.js"></script>
     <script type="text/javascript" src="scripts/controllers/QueueViewer.js"></script>
-    	  
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    
 	  </body>
 </html>
 

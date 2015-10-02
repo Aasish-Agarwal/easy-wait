@@ -71,6 +71,7 @@
             	qstatus.retrieveAll(vm.auth_token,vm.counter).then(function(results) {
                     console.log(results);
                     vm.current_bookings = results.data;
+                    vm.getStatus();
                 }, function(error) {
                   console.log(error);
                 });
