@@ -33,7 +33,8 @@ Route::group(array('prefix' => 'api'), function()
 	Route::any('/vendor/register/{cell}', 'VendorController@signup');
 	Route::any('/vendor/verify/{cell}/{otp}', 'VendorController@verifyotp');
 	Route::any('/vendor/setname/{token}/{name}', 'VendorController@setName');
-	Route::any('/settings/set/{token}', 'SettingsController@configure');
+	Route::any('/settings/set/{token}', 'SettingsController@set');
+	Route::any('/settings/get/{token}', 'SettingsController@get');
 	
 	Route::any('/qstatus/update/{token}/{counter}', 'VendorController@updateCounter');
 	Route::any('/qstatus/get/{cell}','VendorController@getCounter');

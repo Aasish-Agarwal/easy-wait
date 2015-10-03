@@ -15,8 +15,8 @@ class Settings extends Model
 
     const INITIAL_EMPTY_POSITIONS = 'skip';
     const PERIODIC_EMPTY_POSITION = 'skip_every';
-    
-    public function set($token,$name,$value)
+	const NUM_SETTINGS = 2;    
+    public function set($cell,$name,$value)
     {
 
     
@@ -32,6 +32,7 @@ class Settings extends Model
 			return 5;
 		}
 		
+		return 'undefined';
     }
     
 }
