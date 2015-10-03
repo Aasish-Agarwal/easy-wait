@@ -41,6 +41,12 @@
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
 
+                if ( vm.mobile ) {
+                	vm.flag_viewing_queue = true;
+                	
+                } else {
+                	vm.flag_viewing_queue = false;
+                }
                 
                 if (! vm.all_bookings ) {
                 	vm.all_bookings = {};
@@ -104,8 +110,12 @@
         			  vm.update_rate = '';
         		  }
 
-        		  vm.last_updated = Math.round((results.data.tmnow - results.data.updtm)/60) + ' min ago';
-                  
+        		  vm.last_updated = Math.round((results.data.tmnow - results.data.updtm)/60) ;
+                  if ( vm.last_updated > 120 ) {
+                	  vm.last_updated = '';
+                  } else {
+                	  vm.last_updated += ' min ago';
+                  }
                   
                   vm.isAcceptingBookings = results.data.bookings_open;
                   vm.qsize = results.data.qsize;
@@ -148,6 +158,7 @@
                     	vm.vendor_info_map[mobile] = results.data.name;
                         vm.subscribed_numbers[mobile] = mobile; 
                         vm.mobile = mobile;
+                    	vm.flag_viewing_queue = true;
                         vm.getStatus();
 
                         if ( vm.all_bookings[mobile] ) {
@@ -305,6 +316,7 @@
                 if ( mobile == vm.mobile ) {
                 	vm.counter = '';
                     vm.mobile = '';
+                	vm.flag_viewing_queue = false;
                 	vm.booked_counters = {};
                 	vm.current_bookings = {};
                     $cookies.remove('last_subscription');
@@ -317,9 +329,6 @@
             
             
             vm.showNumberInput  = function() {
-                //vm.flag_show_name = true;
-                //vm.flag_show_number = false;
-                //vm.flag_show_otp = false;
             	if ( vm.name_to_publish && vm.name_to_publish.length > 0 ) {
             		vm.flag_show_name = false;
             		vm.flag_show_number = true;

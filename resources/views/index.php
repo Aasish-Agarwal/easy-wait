@@ -73,7 +73,7 @@
 	                	<button class="glyphicon glyphicon-search btn btn-success" data-toggle="tooltip" title="Watch Status"  ng-click="vm.setMobile(vm.mobile_to_subscribe)"></button>
 					</form>
 	      		
-	      					<table class="table" >
+	      					<table ng-if="vm.flag_viewing_queue" class="table" >
 	      					<tr>
 	      					<td class="bookedbox" colspan=2> {{vm.counter}} </td>
 			                </tr>
@@ -91,7 +91,7 @@
 			                
 			       </div>
 
-	      		<div class="col-md-4">
+	      		<div ng-if="vm.flag_viewing_queue" class="col-md-4">
 					<h3>Appointments:
 					<span class="label label-danger">{{vm.AppointmentsClosed}}</span> 
 					<span class="label label-success">{{vm.AppointmentsOpen}}</span>			    
