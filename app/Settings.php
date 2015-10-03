@@ -36,6 +36,11 @@ class Settings extends Model
     public static function get($cell,$name)
     {
         $retval = 'undefined';
+        
+        if ($name == Settings::INITIAL_EMPTY_POSITIONS ||
+        $name == Settings::PERIODIC_EMPTY_POSITION) {
+        	$retval = 0;
+        }
     	try {
 	    	$results = Settings::where(array('cell' => $cell, 'name' => $name))
 	    	->firstOrFail();
