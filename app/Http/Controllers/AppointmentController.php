@@ -41,6 +41,7 @@ class AppointmentController extends Controller
 		$vendor = new Vendor();
 		$apointment = new Appointments();
 		
+		$reference = strtoupper(trim($reference));
 		
 		## Return if invalid vendor
 		if ( ! $vendor->isValidVendor($cell) ) 
@@ -54,8 +55,7 @@ class AppointmentController extends Controller
 		}
 		else if ( $apointment->isbBoked($cell, $reference) > 0  ) {
 			$retval['srvr_msg'] = 'Already Booked';
-			$retval['status'] = 1;
-			$retval['counter'] = $apointment->isbBoked($cell, $reference);
+			$retval['status'] = -1;
 			return 	$retval;
 		} else {
 			$booking_successful = 0;
@@ -94,7 +94,7 @@ class AppointmentController extends Controller
 					if ( $periodic_empty_position > 0  
 						&& ($next_counter % $periodic_empty_position) == 0 ) {
 						$vendor->setNextAvailableCounter($cell);
-						$apointment->book($cell, '* FREE *-- ' .  $next_counter , $next_counter);
+						$apointment->book($cell, 'FREE: ' .  $next_counter , $next_counter);
 						$next_counter = $vendor->getNextAvailableCounter($cell);
 					}
 					if ( $apointment->book($cell, $reference, $next_counter) > 0  )

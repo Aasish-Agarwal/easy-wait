@@ -217,12 +217,11 @@
                         $cookies.put('all_bookings',angular.toJson(vm.all_bookings), {'expires': vm.expireTomorrow});
                         vm.booking_reference = '';
                     } else {
-                    	alert ("Failed to book appointment: " + results.data.srvr_msg);
+                    	bootbox.alert("Failed to book appointment: " + results.data.srvr_msg, function() {});
                     }
             }, function(error) {
                   console.log(error);
                 });
-
             }
 
             
