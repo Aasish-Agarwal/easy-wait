@@ -40,23 +40,31 @@
 
       	<div class="row">
       	      		<div class="col-md-3">
-		                <form ng-if="vm.flag_show_name"  class="navbar-form">
-							<input class="form-control" type="text" ng-model="vm.name_to_publish" placeholder="Name"></input>
-		                	<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.showNumberInput()"></button>
-						</form>
-	                
 
-		                <form ng-if="vm.flag_show_number"  class="navbar-form">
-							<input class="form-control" type="number" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13></input>
-		                	<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.register()"></button>
-   		                </form>
-						
-		                <form ng-if="vm.flag_show_otp"  class="navbar-form">
-		                    <input class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=3></input>
-		                	<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.verifyOTP()"></button>
-		               </form>
-		                
-						<h4>{{vm.message}}</h4>
+
+					<div ng-if="vm.flag_show_name" class="input-group">
+				      <input class="form-control" type="text" ng-model="vm.name_to_publish" placeholder="Name">
+				      <span class="input-group-btn">
+				        <button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.showNumberInput()"></button>
+				      </span>
+				    </div><!-- /input-group -->
+				    
+					                
+					<div ng-if="vm.flag_show_number" class="input-group">
+				      <input class="form-control" type="number" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13>
+				      <span class="input-group-btn">
+						<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.register()"></button>
+				      </span>
+				    </div><!-- /input-group -->
+				    
+					<div ng-if="vm.flag_show_otp" class="input-group">
+						<input class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=3>
+					    <span class="input-group-btn">
+							<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.verifyOTP()"></button>
+					    </span>
+				    </div><!-- /input-group -->
+    
+					<h4>{{vm.message}}</h4>
 						
 					</div>
 					
