@@ -90,16 +90,20 @@
           // on the vm.timeentries array
             vm.getStatus = function() {
             	vm.message = '' ;
+            	
+            	if ( !vm.mobile ) {
+            		return;
+            	}
             	qstatus.getStatus(vm.mobile).then(function(results) {
         		  vm.counter = results.data.counter;
 
         		  if (vm.counter > 0 ) {
-                      vm.update_rate = Math.round((results.data.updtm - results.data.starttm)/60/vm.counter);
+                      vm.update_rate = Math.round((results.data.updtm - results.data.starttm)/60/vm.counter) + ' min each';
         		  } else {
-        			  vm.update_rate = '-';
+        			  vm.update_rate = '';
         		  }
 
-        		  vm.last_updated = Math.round((results.data.tmnow - results.data.updtm)/60);
+        		  vm.last_updated = Math.round((results.data.tmnow - results.data.updtm)/60) + ' min ago';
                   
                   
                   vm.isAcceptingBookings = results.data.bookings_open;

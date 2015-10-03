@@ -63,9 +63,15 @@
       	<div class="row">
       	<h3></h3>
       	</div>
-      	<div class="row">
 
-      	<div class="well col-md-3">
+      	<div ng-if="!vm.flag_authenticated"class="row">
+      	<h3>Registration Required To Manage Queues</h3>
+      	</div>
+      	
+      	
+      	<div ng-if="vm.flag_authenticated" class="row">
+
+	      	<div class="well col-md-3">
 		      	{{ vm.auth_username }} - {{ vm.registered_mobile }}
 		      	<table >
 					  <tr>

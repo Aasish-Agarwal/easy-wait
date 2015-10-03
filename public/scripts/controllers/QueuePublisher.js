@@ -24,6 +24,8 @@
                 vm.initial_reserved_slots = 0;
                 vm.periodic_reserved_slots = 0;
 
+                vm.flag_authenticated = false;
+                
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
                 
@@ -39,6 +41,8 @@
                 }
                 if (! vm.auth_username ) {
                 	vm.auth_username = '';
+                } else {
+                	vm.flag_authenticated = true;
                 }
 
                 vm.getStatus();

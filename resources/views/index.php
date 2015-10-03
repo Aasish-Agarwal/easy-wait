@@ -79,8 +79,8 @@
 			                </tr>
 
 	      					<tr>
-	      					<td class="vendorname" >{{vm.update_rate}} min each</td>
-	      					<td class="vendorname" >{{vm.last_updated}} min ago</td>
+	      					<td class="vendorname" >{{vm.update_rate}} </td>
+	      					<td class="vendorname" >{{vm.last_updated}} </td>
 	      					</tr>
 			                
 			                <tr>

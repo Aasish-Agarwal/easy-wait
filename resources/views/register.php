@@ -42,19 +42,19 @@
       	      		<div class="col-md-3">
 		                <form ng-if="vm.flag_show_name"  class="navbar-form">
 							<input class="form-control" type="text" ng-model="vm.name_to_publish" placeholder="Name"></input>
-		                	<button class="glyphicon glyphicon-search btn btn-success" data-toggle="tooltip" title="Watch Status"  ng-click="vm.showNumberInput()"></button>
+		                	<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.showNumberInput()"></button>
 						</form>
 	                
 
-		                <form class="navbar-form">
-							<input ng-if="vm.flag_show_number"  class="form-control" type="number" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13></input>
-   		                    <button ng-if="vm.flag_show_number" class="btn btn-primary" ng-click="vm.register()">Request OTP</button>
-		                </form>
+		                <form ng-if="vm.flag_show_number"  class="navbar-form">
+							<input class="form-control" type="number" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13></input>
+		                	<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.register()"></button>
+   		                </form>
 						
-		                <form class="navbar-form">
-		                    <input ng-if="vm.flag_show_otp" class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=3></input>
-		                    <button ng-if="vm.flag_show_otp" class="btn btn-primary" ng-click="vm.verifyOTP()">Verify</button>
-		                </form>
+		                <form ng-if="vm.flag_show_otp"  class="navbar-form">
+		                    <input class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=3></input>
+		                	<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.verifyOTP()"></button>
+		               </form>
 		                
 						<h4>{{vm.message}}</h4>
 						
