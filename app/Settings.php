@@ -13,26 +13,37 @@ class Settings extends Model
      */
     protected $table = 'settings';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['value'];
+    public $timestamps = false;
+    
     const INITIAL_EMPTY_POSITIONS = 'skip';
     const PERIODIC_EMPTY_POSITION = 'skip_every';
 	const NUM_SETTINGS = 2;    
     public function set($cell,$name,$value)
     {
-
-    
+    	$settings = Settings::firstOrNew(array('cell' => $cell, 'name' => $name));
+    	$settings->value = $value;
+    	$settings->cell = $cell;
+    	$settings->name = $name;
+    	$settings->save();
     }
 
     public static function get($cell,$name)
     {
-		if ($name == Settings::INITIAL_EMPTY_POSITIONS ) {
-			return 10;
-		}
-
-		if ($name == Settings::PERIODIC_EMPTY_POSITION ) {
-			return 5;
-		}
-		
-		return 'undefined';
+        $retval = 'undefined';
+    	try {
+	    	$results = Settings::where(array('cell' => $cell, 'name' => $name))
+	    	->firstOrFail();
+	    	$retval = $results->value;
+    	} catch ( \Exception $e) {
+    		
+    	}
+		return $retval;
     }
     
 }
