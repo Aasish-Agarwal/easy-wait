@@ -64,8 +64,12 @@
 					    </span>
 				    </div><!-- /input-group -->
     
-					<h4>{{vm.message}}</h4>
-						
+					{{vm.message}}
+
+					<hr>
+					Having Difficulties? Contact Us:
+					<a href="mailto:allied.service.14@gmail.com?Subject=Easy Wait - Service Enquiry" target="_top">allied.service.14@gmail.com</a>
+					
 					</div>
 					
 		</div>

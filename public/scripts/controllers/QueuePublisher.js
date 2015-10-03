@@ -45,11 +45,13 @@
                 	vm.flag_authenticated = true;
                 }
 
-                vm.getStatus();
-                vm.update();
-                vm.retrieveAll();
-                vm.currentBookingStatus();
-                vm.getConfiguration();
+                if ( vm.flag_authenticated ) {
+                    vm.getStatus();
+                    vm.update();
+                    vm.retrieveAll();
+                    vm.currentBookingStatus();
+                    vm.getConfiguration();
+                }
          	}
 
           // on the vm.timeentries array

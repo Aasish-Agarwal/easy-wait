@@ -320,6 +320,7 @@
             	if ( vm.name_to_publish && vm.name_to_publish.length > 0 ) {
             		vm.flag_show_name = false;
             		vm.flag_show_number = true;
+            		vm.message = 'Provide your mobile number with country code';
             	}
             	
             }
