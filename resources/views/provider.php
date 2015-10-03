@@ -66,47 +66,66 @@
       	<div class="row">
 
       	<div class="well col-md-3">
-      	{{ vm.auth_username }} - {{ vm.registered_mobile }}
-      	<table >
-			  <tr>
-			  <td ><button type="button" class="btn btn-danger btn-lg" ng-click="vm.stoplocal()"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></button></td>
-			  <td class="bookedbox">{{vm.counter}}</td>
-			  <td class="bookedbox_server ">{{vm.server_counter}}</td>
-			  <td ><button type="button" class="btn btn-primary btn-lg" ng-click="vm.nextlocal()"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button></td>
-			  </tr>
-		</table>
+		      	{{ vm.auth_username }} - {{ vm.registered_mobile }}
+		      	<table >
+					  <tr>
+					  <td ><button type="button" class="btn btn-danger btn-lg" ng-click="vm.stoplocal()"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></button></td>
+					  <td class="bookedbox">{{vm.counter}}</td>
+					  <td class="bookedbox_server ">{{vm.server_counter}}</td>
+					  <td ><button type="button" class="btn btn-primary btn-lg" ng-click="vm.nextlocal()"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button></td>
+					  </tr>
+				</table>
 
-    </div>
+		    </div>
 			
     
 			<div class="col-md-4">
-<h3>Appointments:
-<span class="label label-danger">{{vm.isNotAcceptingBookings}}</span> 
-<span class="label label-success">{{vm.isAcceptingBookings}}</span>
-<span class="label label-primary">Next: {{vm.qsize}}</span>
-</h3>			    
-					<table class="table table-striped" >
-					 	<thead>
-					  <tr>
-					     <th>Reference</th>
-					     <th>Counter</th>
-					  </tr>
-					 </thead>
- 					  <tbody ng:repeat="booking in vm.current_bookings">
-					    <tr><td>{{booking.reference}}</td><td>{{booking.counter}}</td></tr>
-					  </tbody>
-					</table>			
-			
-<ul class="nav nav-pills" role="tablist">
-  <li role="presentation"><button type="button" class="btn btn-danger btn-lg"   ng-click="vm.clearAllBookings()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </button></li>
-  <li role="presentation"><button type="button" class="btn btn-danger btn-lg" ng-click="vm.closeAppointments()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button></li>
-  <li role="presentation"><button type="button" class="btn btn-success btn-lg"  ng-click="vm.acceptAppointments()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </button></li>
-  <li role="presentation"><button type="button" class="btn btn-primary btn-lg"  ng-click="vm.retrieveAll()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></li>
-</ul>
-					
-			    
-			    
+				<h3>Appointments:
+				<span class="label label-danger">{{vm.isNotAcceptingBookings}}</span> 
+				<span class="label label-success">{{vm.isAcceptingBookings}}</span>
+				<span class="label label-primary">Next: {{vm.qsize}}</span>
+				</h3>			    
+									<table class="table table-striped" >
+									 	<thead>
+									  <tr>
+									     <th>Reference</th>
+									     <th>Counter</th>
+									  </tr>
+									 </thead>
+				 					  <tbody ng:repeat="booking in vm.current_bookings">
+									    <tr><td>{{booking.reference}}</td><td>{{booking.counter}}</td></tr>
+									  </tbody>
+									</table>			
+							
+				<ul class="nav nav-pills" role="tablist">
+				  <li role="presentation"><button type="button" class="btn btn-danger btn-lg"   ng-click="vm.clearAllBookings()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </button></li>
+				  <li role="presentation"><button type="button" class="btn btn-danger btn-lg" ng-click="vm.closeAppointments()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button></li>
+				  <li role="presentation"><button type="button" class="btn btn-success btn-lg"  ng-click="vm.acceptAppointments()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </button></li>
+				  <li role="presentation"><button type="button" class="btn btn-primary btn-lg"  ng-click="vm.retrieveAll()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></li>
+				</ul>
 			</div>
+			
+			<div class="col-md-4">
+				<h3>Settings:</h3>
+				<hr>
+					You have first <span style="font-size:1.1em;" class="label label-info">{{vm.initial_reserved_slots}}</span> slots free. Set this to a different value if you want.
+	                <form class="navbar-form">
+	                	<input type="number" data-toggle="tooltip" title="Initial Appointments To Reserve" class="form-control" ng-model="vm.initial_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2></input>
+	                	<button class="glyphicon glyphicon-ok btn btn-success" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip',vm.initial_slots_to_reserve)"></button>
+					</form>
+				 
+				<hr>
+					You have A free Slot after every <span style="font-size:1.1em;" class="label label-info">{{vm.periodic_reserved_slots}}</span> Appointments. Set this to a different value if you want.
+
+	                <form class="navbar-form">
+	                	<input type="number" data-toggle="tooltip" title="Free Slot After N Bookings" class="form-control" ng-model="vm.periodic_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2></input>
+	                	<button class="glyphicon glyphicon-ok btn btn-success" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip_every',vm.periodic_slots_to_reserve)"></button>
+					</form>
+				
+				<hr>
+			
+			</div>
+			
 		</div>
       </div>
 

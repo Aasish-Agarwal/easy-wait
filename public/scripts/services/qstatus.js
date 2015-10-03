@@ -76,6 +76,16 @@ var acceptAppointment = function(token) {
 	    return $http.get(url).success(function(data) { });
 	};
 		
+ var setConfiguration = function(token,options) {
+	    var url = 'api/settings/set/' + token + '?' +  options;
+	    return $http.get(url).success(function(data) { });
+	};
+	
+ var getConfiguration = function(token,options) {
+	    var url = 'api/settings/get/' + token + '?' +  options;
+	    return $http.get(url).success(function(data) { });
+	};
+	
 	return {
     getStatus: getStatus,
     register: register,
@@ -91,6 +101,8 @@ var acceptAppointment = function(token) {
     retrieveAll: retrieveAll,
     update_counter: update_counter,
     clearAllBookings: clearAllBookings,
-    cancelBooking: cancelBooking
+    cancelBooking: cancelBooking,
+    setConfiguration: setConfiguration,
+    getConfiguration: getConfiguration
   };
 }]);
