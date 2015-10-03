@@ -64,11 +64,6 @@
       	<h3></h3>
       	</div>
 
-      	<div ng-if="!vm.flag_authenticated"class="row">
-      	<h3>Registration Required To Manage Queues</h3>
-      	</div>
-      	
-      	
       	<div ng-if="vm.flag_authenticated" class="row">
 
 	      	<div class="well col-md-3">

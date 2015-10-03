@@ -8,7 +8,7 @@
         .module('easywait')
         .controller('QueueViewer', QueueViewer);
 
-    function QueueViewer(qstatus, $timeout, $cookies) {
+    function QueueViewer(qstatus,  $window, $timeout, $cookies) {
 
             // vm is our capture variable
             var vm = this;
@@ -212,6 +212,8 @@
                         vm.otp = '';
                         vm.name_to_publish = '';
                 		vm.flag_show_otp = false;
+                    	
+                		$window.location.href = '/provider';
                         
                     	vm.message = 'Thanks for giving us an opportunity to serve. You can now start managing your queues' ;
                 	}

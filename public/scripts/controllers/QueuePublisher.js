@@ -8,7 +8,7 @@
         .module('easywait')
         .controller('QueuePublisher', QueuePublisher);
 
-    function QueuePublisher(qstatus, $scope, $timeout, $cookies) {
+    function QueuePublisher(qstatus, $window, $scope, $timeout, $cookies) {
 
             // vm is our capture variable
             var vm = this;
@@ -41,6 +41,7 @@
                 }
                 if (! vm.auth_username ) {
                 	vm.auth_username = '';
+                	$window.location.href = '/register';
                 } else {
                 	vm.flag_authenticated = true;
                 }
