@@ -40,20 +40,26 @@
 
       	<div class="row">
       	      		<div class="col-md-3">
-		                <form class="navbar-form">
-							<input class="form-control" type="text" ng-model="vm.name_to_publish" placeholder="Name">
-		                	<p>
-		                	<input class="form-control" type="number" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX">
-		                    </input>
-   		                    <button class="btn btn-primary" ng-click="vm.register()">Request OTP</button>
-   		                    <p>
-		                    <input class="form-control" ng-model="vm.otp" placeholder="OTP">
-		                    </input>
-		                    <button class="btn btn-primary" ng-click="vm.verifyOTP()">Verify</button>
+		                <form ng-if="vm.flag_show_name"  class="navbar-form">
+							<input class="form-control" type="text" ng-model="vm.name_to_publish" placeholder="Name"></input>
+		                	<button class="glyphicon glyphicon-search btn btn-success" data-toggle="tooltip" title="Watch Status"  ng-click="vm.showNumberInput()"></button>
 						</form>
-			<h4>{{vm.message}}</h4>
+	                
+
+		                <form class="navbar-form">
+							<input ng-if="vm.flag_show_number"  class="form-control" type="number" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13></input>
+   		                    <button ng-if="vm.flag_show_number" class="btn btn-primary" ng-click="vm.register()">Request OTP</button>
+		                </form>
+						
+		                <form class="navbar-form">
+		                    <input ng-if="vm.flag_show_otp" class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=3></input>
+		                    <button ng-if="vm.flag_show_otp" class="btn btn-primary" ng-click="vm.verifyOTP()">Verify</button>
+		                </form>
+		                
+						<h4>{{vm.message}}</h4>
 						
 					</div>
+					
 		</div>
       	
       </div>
@@ -72,7 +78,8 @@
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/services/qstatus.js"></script>
     <script type="text/javascript" src="scripts/controllers/QueueViewer.js"></script>
-    	  
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    
 	  </body>
 </html>
 

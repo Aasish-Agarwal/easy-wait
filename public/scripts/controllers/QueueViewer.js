@@ -22,6 +22,10 @@
                 vm.update_rate = '';
                 vm.last_updated = '';
 
+                vm.flag_show_name = true;
+                vm.flag_show_number = false;
+                vm.flag_show_otp = false;
+                
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
                 vm.vendor_info_map = angular.fromJson($cookies.get('vendor_info_map'));
@@ -162,33 +166,51 @@
             }    
 
             vm.register = function() {
-            	qstatus.register(vm.cell_to_register).then(function(results) {
-                	vm.message = results.data ;
-                    console.log(results);
-                }, function(error) {
-                  console.log(error);
-                });
+            	
+                //vm.flag_show_number = false;
+                //vm.flag_show_otp = false;
+
+            	if ( vm.cell_to_register ) {
+                	qstatus.register(vm.cell_to_register).then(function(results) {
+                		vm.flag_show_number = false;
+                		vm.flag_show_otp = true;
+                		vm.message = results.data ;
+                        console.log(results);
+                    }, function(error) {
+                      console.log(error);
+                    });
+            	} else {
+                	bootbox.alert("Invalid Mobile Number ", function() {});
+            	}
             } 
 
             vm.verifyOTP = function() {
             	vm.message = '' ;
+            	if ( !vm.otp ) {
+                	bootbox.alert("3 Digit OTP Required", function() {});
+            		return;
+            	}
             	qstatus.verify(vm.cell_to_register,vm.otp).then(function(results) {
-                	vm.token = results.data.token ;
-                    
-                    // Setting a cookie
-                    $cookies.put('registered_mobile',vm.cell_to_register, {'expires': vm.expireDate});
-                    $cookies.put('auth_token',vm.token, {'expires': vm.expireDate});
-                    $cookies.put('auth_username',vm.name_to_publish, {'expires': vm.expireDate});
-                    
-                    vm.cell_of_provider = vm.cell_to_register;
-                    vm.getProviderStatus();
-                    vm.setVendorName();
+                	if ( results.data.token == "-1" ) {
+                    	bootbox.alert("OTP Is incorrect", function() {});
+                	} else {
+                		vm.token = results.data.token ;
+                        
+                        // Setting a cookie
+                        $cookies.put('registered_mobile',vm.cell_to_register, {'expires': vm.expireDate});
+                        $cookies.put('auth_token',vm.token, {'expires': vm.expireDate});
+                        $cookies.put('auth_username',vm.name_to_publish, {'expires': vm.expireDate});
+                        
+                        vm.cell_of_provider = vm.cell_to_register;
+                        vm.setVendorName();
 
-                    vm.cell_to_register = '';
-                    vm.otp = '';
-                    vm.name_to_publish = '';
-                    
-                	vm.message = 'Thanks for giving us an opportunity to serve. Chant Hare Krishna and Be Happy' ;
+                        vm.cell_to_register = '';
+                        vm.otp = '';
+                        vm.name_to_publish = '';
+                		vm.flag_show_otp = false;
+                        
+                    	vm.message = 'Thanks for giving us an opportunity to serve. You can now start managing your queues' ;
+                	}
                     console.log(results);
                 }, function(error) {
                   console.log(error);
@@ -285,6 +307,20 @@
                 $cookies.put('subscribed_numbers',angular.toJson(vm.subscribed_numbers), {'expires': vm.expireDate});
                 $cookies.put('all_bookings',angular.toJson(vm.all_bookings), {'expires': vm.expireTomorrow});
             }
+            
+            
+            vm.showNumberInput  = function() {
+                //vm.flag_show_name = true;
+                //vm.flag_show_number = false;
+                //vm.flag_show_otp = false;
+            	if ( vm.name_to_publish && vm.name_to_publish.length > 0 ) {
+            		vm.flag_show_name = false;
+            		vm.flag_show_number = true;
+            	}
+            	
+            }
     }
+
+    
     
 })();

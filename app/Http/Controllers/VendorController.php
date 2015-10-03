@@ -37,7 +37,7 @@ class VendorController extends Controller
     	curl_setopt($ch, CURLOPT_HEADER, 0);
     	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     	// grab URL and pass it to the browser
-    	$str = curl_exec($ch);
+//    	$str = curl_exec($ch);
     	// close cURL resource, and free up system resources
     	curl_close($ch);
 
