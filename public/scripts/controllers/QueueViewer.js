@@ -41,6 +41,7 @@
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
 
+                
                 if (! vm.all_bookings ) {
                 	vm.all_bookings = {};
                 } 
