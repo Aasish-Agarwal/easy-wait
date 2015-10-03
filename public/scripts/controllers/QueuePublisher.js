@@ -63,10 +63,12 @@
             vm.stoplocal = function() {
             	vm.counter = 0;
                 $cookies.put('current_counter',vm.counter, {'expires': vm.expireTomorrow});
+            	vm.retrieveAll();
             }
             vm.nextlocal = function() {
             	vm.counter = parseInt(vm.counter) + 1;
                 $cookies.put('current_counter',vm.counter, {'expires': vm.expireTomorrow});
+            	vm.retrieveAll();
             }
             
             vm.retrieveAll = function() {
