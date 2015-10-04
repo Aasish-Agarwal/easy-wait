@@ -58,7 +58,7 @@
 				    </div><!-- /input-group -->
 				    
 					<div ng-if="vm.flag_show_otp" class="input-group">
-						<input class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=3>
+						<input class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=5>
 					    <span class="input-group-btn">
 							<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.verifyOTP()"></button>
 					    </span>

@@ -11,8 +11,8 @@ angular.module('easywait')
 	    return $http.get(url).success(function(data) { });
   };
   
-  var verify = function(cell,otp) {
-	    var url = 'api/vendor/verify/' + cell + "/" + otp;
+  var verify = function(cell,otp,options) {
+	    var url = 'api/vendor/verify/' + cell + "/" + otp + '?' + options;
 	    return $http.get(url).success(function(data) { });
 	};
 

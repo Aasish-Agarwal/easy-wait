@@ -189,8 +189,8 @@
             	if ( vm.cell_to_register ) {
                 	qstatus.register(vm.cell_to_register).then(function(results) {
 
-                        if ( results.data.service_response.Status == 'Exception' ) {
-                        	bootbox.alert(results.data.service_response.Result, function() {});
+                        if ( results.data.status == 'Exception' ) {
+                        	bootbox.alert(results.data.service_response, function() {});
                         } else {
                     		vm.flag_show_number = false;
                     		vm.flag_show_otp = true;
@@ -204,6 +204,14 @@
                     		
                     		
                     		vm.message = $sce.trustAsHtml(message) ;
+                    		
+                    		if (results.data.service == 'cognalys') {
+                    			vm.otp_service = 'cognalys';
+                    			vm.keymatch = results.data.keymatch;
+                    			vm.otp_start = results.data.otp_start;
+                    		} else {
+                    			vm.otp_service = 'motp';
+                    		}
                         }
                         console.log(results);
                 	}, function(error) {
@@ -217,10 +225,18 @@
             vm.verifyOTP = function() {
             	vm.message = '' ;
             	if ( !vm.otp ) {
-                	bootbox.alert("3 Digit OTP Required", function() {});
+                	bootbox.alert("OTP Required", function() {});
             		return;
             	}
-            	qstatus.verify(vm.cell_to_register,vm.otp).then(function(results) {
+            	
+    			var options = '';
+    			if ( vm.otp_service == 'cognalys' ) {
+    				options = 'service=cognalys&keymatch=' + vm.keymatch + '&otp_start=' + vm.otp_start; 
+    			} else {
+    				options = 'service=motp'; 
+    			}
+            	
+            	qstatus.verify(vm.cell_to_register,vm.otp,options).then(function(results) {
                 	if ( results.data.token == "-1" ) {
                     	bootbox.alert("OTP Is incorrect", function() {});
                 	} else {

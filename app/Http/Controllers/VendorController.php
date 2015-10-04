@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Vendor;
 
+use Illuminate\Support\Facades\Input;
+
 class VendorController extends Controller
 {
     /**
@@ -28,29 +30,85 @@ class VendorController extends Controller
     public function signup($cell)
     {
         //
-    	$ndigits = 3;
-    	$password = str_pad(rand(1, 999), $ndigits, "0", STR_PAD_LEFT);
-    	$Publickey = '0004-73762a1f-5263457d-fe7d-176d42e7';
-    	$ch = curl_init();
-    	// set URL and other appropriate options
-    	curl_setopt($ch, CURLOPT_URL, "http://api.mOTP.in/v1/$Publickey/$cell/$password");
-    	curl_setopt($ch, CURLOPT_HEADER, 0);
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    	// grab URL and pass it to the browser
-    	$result = curl_exec($ch);
-    	// close cURL resource, and free up system resources
-    	curl_close($ch);
+    	$missed_call_service = 'mOTP';
+    	$missed_call_service = 'cognalys';
+    	 
+    	if ( $missed_call_service == 'mOTP' ) { 
+	    	$ndigits = 3;
+	    	$password = str_pad(rand(1, 999), $ndigits, "0", STR_PAD_LEFT);
+	    	$Publickey = '0004-73762a1f-5263457d-fe7d-176d42e7';
+	    	$ch = curl_init();
+	    	// set URL and other appropriate options
+	    	curl_setopt($ch, CURLOPT_URL, "http://api.mOTP.in/v1/$Publickey/$cell/$password");
+	    	curl_setopt($ch, CURLOPT_HEADER, 0);
+	    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	    	// grab URL and pass it to the browser
+	    	$result = curl_exec($ch);
+	    	// close cURL resource, and free up system resources
+	    	curl_close($ch);
+	
+	    	$json = json_decode($result, true);
+	    	#print_r($json);
+	    	
+	    	$otp = $password;
+	    	$vendor = new Vendor();
+	    	$vendor->signup($cell, $otp);
+	
+	    	$retval = [];
+	    	$retval['message'] = 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from';
+	    	$retval['status'] = $json['Status'];
+	    	$retval['service_response'] = $json['Result'];
+    	}
 
-    	$json = json_decode($result, true);
-    	#print_r($json);
-    	
-    	$otp = $password;
-    	$vendor = new Vendor();
-    	$vendor->signup($cell, $otp);
+    	if ( $missed_call_service == 'cognalys' ) {
+    		$ndigits = 5;
 
-    	$retval = [];
-    	$retval['message'] = 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from';
-    	$retval['service_response'] = $json;
+    		
+    		
+    		$app_id='dfc143fef04f431eb535bd5';
+    		$access_token='6789863e2fa229edfb3e57251cca55d9a601e6ba';
+
+    		#https://www.cognalys.com/api/v1/otp/?app_id=dfc143fef04f431eb535bd5&access_token=6789863e2fa229edfb3e57251cca55d9a601e6ba&mobile=+918750688382
+    		$url = 'https://cognalys.p.mashape.com/?';
+    		$url .= 'app_id=' . $app_id;
+    		$url .= '&access_token=' . $access_token;
+    		$url .= '&mobile=+' . $cell;
+
+    		\Unirest\Request::verifyPeer(false);
+    		
+    		$result = \Unirest\Request::get($url,
+    				array(
+    						"X-Mashape-Key" => "ehq1KAY8TemshmrDN3lvqKdMiPiAp11jxqijsnJp2pqiVjIMIL",
+    						"Accept" => "application/json"
+    				)
+    		);
+    		    		
+    		$retval = [];
+    		$retval['message'] = 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from';
+    		#$retval['url'] = $url;
+    		$retval['service'] = 'cognalys';
+
+    		$json = $result->body;
+    		
+    		if ( $json->status == 'success') {
+    			preg_match_all('/\d+/', $json->otp_start, $matches);
+    			$retval['keymatch'] = $json->keymatch;
+	    		$retval['otp_start'] = $matches[0][0];
+	    		 
+	    		$vendor = new Vendor();
+	    		$vendor->signup($cell, $matches[0][0]);
+    		}
+    		
+    		
+    		$retval['status'] = $json->status;
+    		
+    		
+    		if ( $json->status == 'failed') {
+    			$retval['status'] = 'Exception';
+    			$retval['service_response'] = $json->errors;
+    		}
+    	}
+    	 
     	return $retval;
     }
 
@@ -61,9 +119,48 @@ class VendorController extends Controller
      */
     public function verifyotp($cell,$otp)
     {
-    	$vendor = new Vendor();
-    	$token = $vendor -> matchOTP($cell,$otp);
-    	return($token);
+    	$filters = Input::only('service','keymatch','otp_start');
+
+    	if ( $filters['service'] == 'cognalys') {
+    		// These code snippets use an open-source library. http://unirest.io/php
+    		$app_id='dfc143fef04f431eb535bd5';
+    		$access_token='6789863e2fa229edfb3e57251cca55d9a601e6ba';
+    		
+    		#https://www.cognalys.com/api/v1/otp/?app_id=dfc143fef04f431eb535bd5&access_token=6789863e2fa229edfb3e57251cca55d9a601e6ba&mobile=+918750688382
+    		$url = 'https://cognalys.p.mashape.com/confirm/?';
+    		$url .= 'app_id=' . $app_id;
+    		$url .= '&access_token=' . $access_token;
+    		$url .= '&keymatch=' . $filters['keymatch'];
+    		$url .= '&otp=' . $filters['otp_start'] . $otp;
+    		
+    		\Unirest\Request::verifyPeer(false);
+    		
+    		$result = \Unirest\Request::get($url,
+    				array(
+    						"X-Mashape-Key" => "ehq1KAY8TemshmrDN3lvqKdMiPiAp11jxqijsnJp2pqiVjIMIL",
+    						"Accept" => "application/json"
+    				)
+    		);
+    		
+    		$json = $result->body;
+
+    		if ( $json->status == 'failed') {
+	    		$retval = [];
+	    		$retval['token'] = '-2';
+    			$retval['service_response'] = $json->errors;
+    			$retval['url'] = $url;
+    			return $retval;
+    			
+    		} else {
+    			$vendor = new Vendor();
+    			$token = $vendor -> matchOTP($cell,$filters['otp_start']);
+    			return($token);
+    		} 
+    	} else {
+	    	$vendor = new Vendor();
+	    	$token = $vendor -> matchOTP($cell,$otp);
+	    	return($token);
+    	}
     }
 
 
