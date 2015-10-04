@@ -197,7 +197,11 @@
                     		
                     		var message = results.data.message ;
                     		message += '<hr>Registration For: ' + vm.cell_to_register;
-                    		message += '<hr>If you do not recieve the missed call in next 10 minutes. Please SMS "REGISTER" to "919910006970"' ;
+                    		message += '<hr>If you do not recieve the missed call in next 10 minutes.';
+                    		message +=  '<ul><li>Verify that you have the correct number specified.</li>' ;
+                    		message += '<li>If the number is correct try again in 10 minutes</li>' ;
+                    		message += '<li>If you still dont get the missed call, contact us via eMail</li></ul>' ;
+                    		
                     		
                     		vm.message = $sce.trustAsHtml(message) ;
                         }
