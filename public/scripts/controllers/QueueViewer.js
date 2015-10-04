@@ -190,7 +190,11 @@
                 	qstatus.register(vm.cell_to_register).then(function(results) {
 
                         if ( results.data.status == 'Exception' ) {
-                        	bootbox.alert(results.data.service_response, function() {});
+                        	var message = results.data.service_response;
+                        	if ( typeof(message) == 'object') {
+                        		message = JSON.stringify(message);
+                        	}
+                        	bootbox.alert(message, function() {});
                         } else {
                     		vm.flag_show_number = false;
                     		vm.flag_show_otp = true;
@@ -237,8 +241,8 @@
     			}
             	
             	qstatus.verify(vm.cell_to_register,vm.otp,options).then(function(results) {
-                	if ( results.data.token == "-1" ) {
-                    	bootbox.alert("OTP Is incorrect", function() {});
+                	if ( results.data.token == "undef" ) {
+                    	bootbox.alert("OTP Is incorrect" , function() {});
                 	} else {
                 		vm.token = results.data.token ;
                         

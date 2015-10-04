@@ -75,7 +75,7 @@ class Vendor extends Model
     public function matchOTP($cell,$otp)
     {
     	$retval = [];
-    	$retval['token'] = '-2';
+    	$retval['token'] = 'undef';
     	$vndr = \DB::table($this->table)
     	->where('cell', '=', $cell)
     	->get();
@@ -84,7 +84,7 @@ class Vendor extends Model
 				if ( $vndr[0]->otp == $otp ) {
 					$retval['token'] = $vndr[0]->token;
 				} else {
-					$retval['token'] = '-1';
+					$retval['token'] = 'undef';
 				}
     	}
     	return $retval;

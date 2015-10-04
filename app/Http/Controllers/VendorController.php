@@ -146,7 +146,7 @@ class VendorController extends Controller
 
     		if ( $json->status == 'failed') {
 	    		$retval = [];
-	    		$retval['token'] = '-2';
+	    		$retval['token'] = 'undef';
     			$retval['service_response'] = $json->errors;
     			$retval['url'] = $url;
     			return $retval;
