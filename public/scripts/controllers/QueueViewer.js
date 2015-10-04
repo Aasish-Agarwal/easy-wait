@@ -188,11 +188,16 @@
 
             	if ( vm.cell_to_register ) {
                 	qstatus.register(vm.cell_to_register).then(function(results) {
-                		vm.flag_show_number = false;
-                		vm.flag_show_otp = true;
-                		vm.message = results.data ;
+
+                        if ( results.data.service_response.Status == 'Exception' ) {
+                        	bootbox.alert(results.data.service_response.Result, function() {});
+                        } else {
+                    		vm.flag_show_number = false;
+                    		vm.flag_show_otp = true;
+                    		vm.message = results.data.message ;
+                        }
                         console.log(results);
-                    }, function(error) {
+                	}, function(error) {
                       console.log(error);
                     });
             	} else {

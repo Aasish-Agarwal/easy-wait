@@ -37,15 +37,21 @@ class VendorController extends Controller
     	curl_setopt($ch, CURLOPT_HEADER, 0);
     	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     	// grab URL and pass it to the browser
-//    	$str = curl_exec($ch);
+    	$result = curl_exec($ch);
     	// close cURL resource, and free up system resources
     	curl_close($ch);
 
+    	$json = json_decode($result, true);
+    	#print_r($json);
+    	
     	$otp = $password;
     	$vendor = new Vendor();
     	$vendor->signup($cell, $otp);
 
-    	return 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from' ;
+    	$retval = [];
+    	$retval['message'] = 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from';
+    	$retval['service_response'] = $json;
+    	return $retval;
     }
 
     /**
