@@ -30,10 +30,12 @@ class VendorController extends Controller
     public function signup($cell)
     {
         //
-    	$missed_call_service = 'mOTP';
-    	$missed_call_service = 'cognalys';
-    	 
-    	if ( $missed_call_service == 'mOTP' ) { 
+    	#$missed_call_service = 'motp';
+    	#$missed_call_service = 'cognalys';
+
+    	$missed_call_service =  env('APP_OTP_PROVIDER', 'cognalys');
+    	
+    	if ( $missed_call_service == 'motp' ) { 
 	    	$ndigits = 3;
 	    	$password = str_pad(rand(1, 999), $ndigits, "0", STR_PAD_LEFT);
 	    	$Publickey = '0004-73762a1f-5263457d-fe7d-176d42e7';
@@ -55,6 +57,7 @@ class VendorController extends Controller
 	    	$vendor->signup($cell, $otp);
 	
 	    	$retval = [];
+    		$retval['service'] = 'motp';
 	    	$retval['message'] = 'Use the last ' . $ndigits . ' digits of the number you recieved missed call from';
 	    	$retval['status'] = $json['Status'];
 	    	$retval['service_response'] = $json['Result'];
