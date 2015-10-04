@@ -8,7 +8,7 @@
         .module('easywait')
         .controller('QueueViewer', QueueViewer);
 
-    function QueueViewer(qstatus,  $window, $timeout, $cookies) {
+    function QueueViewer(qstatus, $sce,  $window, $timeout, $cookies) {
 
             // vm is our capture variable
             var vm = this;
@@ -194,7 +194,12 @@
                         } else {
                     		vm.flag_show_number = false;
                     		vm.flag_show_otp = true;
-                    		vm.message = results.data.message ;
+                    		
+                    		var message = results.data.message ;
+                    		message += '<hr>Registration For: ' + vm.cell_to_register;
+                    		message += '<hr>If you do not recieve the missed call in next 10 minutes. Please SMS "REGISTER" to "919910006970"' ;
+                    		
+                    		vm.message = $sce.trustAsHtml(message) ;
                         }
                         console.log(results);
                 	}, function(error) {

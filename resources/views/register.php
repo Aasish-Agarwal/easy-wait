@@ -64,8 +64,7 @@
 					    </span>
 				    </div><!-- /input-group -->
     
-					{{vm.message}}
-
+					<p ng-bind-html="vm.message"></p>
 					<hr>
 					Having Difficulties? Contact Us:
 					<a href="mailto:allied.service.14@gmail.com?Subject=Easy Wait - Service Enquiry" target="_top">allied.service.14@gmail.com</a>
@@ -82,6 +81,11 @@
 	  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <!-- Application Dependencies -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js"></script>
+		
+
+	
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-resource.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>

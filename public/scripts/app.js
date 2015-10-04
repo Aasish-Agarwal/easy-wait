@@ -8,7 +8,9 @@
         .module('easywait', [
             'ngResource',
             'ngCookies',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'ngRoute',
+            'ngSanitize'
         ]);
     
 })();

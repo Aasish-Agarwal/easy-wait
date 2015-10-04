@@ -175,6 +175,9 @@
 	  <script src="bs/js/bootstrap.min.js"></script>
     <!-- Application Dependencies -->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js"></script>
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
     
     <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
