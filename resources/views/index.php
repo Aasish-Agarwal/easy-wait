@@ -64,32 +64,32 @@
 	
 	      		<div class="col-md-4">
 	      		
+					<div class="input-group">
+				      <input type="number" data-toggle="tooltip" title="Mobile Number with Country Code" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
+				      <span class="input-group-btn">
+	                	<button class="glyphicon glyphicon-arrow-right btn btn-primary" data-toggle="tooltip" title="Watch Status"  ng-click="vm.setMobile(vm.mobile_to_subscribe)"></button>
+				      </span>
+				    </div><!-- /input-group -->
 	      		
-	                <form class="navbar-form">
-	                
-	                	<input type="number" data-toggle="tooltip" title="Mobile Number with Country Code" class="form-control" ng-model="vm.mobile_to_subscribe" placeholder="91XXXXXXXXXX" ng-minlength=1 ng-maxlength=13>
-	                </input>
-	                	
-	                	<button class="glyphicon glyphicon-search btn btn-success" data-toggle="tooltip" title="Watch Status"  ng-click="vm.setMobile(vm.mobile_to_subscribe)"></button>
-					</form>
 	      		
-	      					<table ng-if="vm.flag_viewing_queue" class="table" >
-	      					<tr>
-	      					<td class="bookedbox" colspan=2> {{vm.counter}} </td>
-			                </tr>
+	      		
+      					<table ng-if="vm.flag_viewing_queue" class="table" >
+      					<tr>
+      					<td class="bookedbox" colspan=2> {{vm.counter}} </td>
+		                </tr>
 
-	      					<tr>
-	      					<td class="vendorname" >{{vm.update_rate}} </td>
-	      					<td class="vendorname" >{{vm.last_updated}} </td>
-	      					</tr>
+      					<tr>
+      					<td class="vendorname" >{{vm.update_rate}} </td>
+      					<td class="vendorname" >{{vm.last_updated}} </td>
+      					</tr>
+		                
+		                <tr>
+		                <td colspan=2 class="vendorname" data-toggle="tooltip" title="Refresh"><button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()">  {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</button></td>
+		                </tr>
+		                </table>
 			                
-			                <tr>
-			                <td colspan=2 class="vendorname" data-toggle="tooltip" title="Refresh"><button class="glyphicon glyphicon-refresh btn btn-primary" ng-click="vm.getStatus()">  {{ vm.vendor_info_map[vm.mobile] }} - {{ vm.mobile  }}</button></td>
-			                </tr>
-			                </table>
 			                
-			                
-			       </div>
+			   </div>
 
 	      		<div ng-if="vm.flag_viewing_queue" class="col-md-4">
 					<h3>Appointments:
@@ -143,7 +143,7 @@
 						  
 						  <td><button class="glyphicon glyphicon-remove btn btn-danger" ng-click="vm.removeSubscription(mobile)"></button></td>
 						  <td >{{ vm.vendor_info_map[mobile] }}</td>
-						  <td><button class="glyphicon glyphicon-ok btn btn-success" ng-click="vm.setMobile(mobile)"></button></td>
+						  <td><button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.setMobile(mobile)"></button></td>
 						  </tr>
  					  </tbody>
 					</table>			
