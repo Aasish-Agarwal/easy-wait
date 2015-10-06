@@ -68,9 +68,23 @@
             }              
 
             vm.stoplocal = function() {
-            	vm.counter = 0;
-                $cookies.put('current_counter',vm.counter, {'expires': vm.expireTomorrow});
-            	vm.retrieveAll();
+            	bootbox.confirm("Do you really want to stop the session?", function(result) {
+            		if ( result == true ) {
+                    	vm.counter = 0;
+                        $cookies.put('current_counter',vm.counter, {'expires': vm.expireTomorrow});
+                    	vm.retrieveAll();
+
+                        if ( parseInt(vm.server_counter) != 0 ) {
+        	            	vm.message = '' ;
+        	            	qstatus.stop(vm.auth_token).then(function(results) {
+        	                    //console.log(results);
+        	                    vm.getStatus();
+        	                }, function(error) {
+        	                  //console.log(error);
+        	                });
+                        }
+            		}
+            	}); 
             }
             vm.nextlocal = function() {
             	vm.counter = parseInt(vm.counter) + 1;
@@ -89,7 +103,7 @@
             }
 
             vm.update = function() {
-                if ( vm.counter != vm.server_counter ) {
+                if ( parseInt(vm.counter) > parseInt(vm.server_counter) ) {
 	            	vm.message = '' ;
 	            	qstatus.update_counter(vm.auth_token, vm.counter).then(function(results) {
 	                    //console.log(results);
@@ -97,7 +111,7 @@
 	                }, function(error) {
 	                  //console.log(error);
 	                });
-                }
+                } 
       		   $timeout(vm.update, 1000);
             }
 
