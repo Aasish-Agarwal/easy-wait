@@ -91,6 +91,10 @@
                 $cookies.put('current_counter',vm.counter, {'expires': vm.expireTomorrow});
             	vm.retrieveAll();
             }
+            vm.refreshView = function() {
+            	vm.retrieveAll();
+            	vm.getStatus();
+            }
             
             vm.retrieveAll = function() {
             	vm.message = '' ;
