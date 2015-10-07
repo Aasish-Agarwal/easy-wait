@@ -30,20 +30,38 @@
 		});
 		</script>
 
-<style type='text/css'>
+	  <script src="bs/js/bootstrap.min.js"></script>
+    <!-- Application Dependencies -->
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+    
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>
 
-.bookedbox {
-  background-color: #f9f9f9;
-  color: black;
-  text-align: center;
-  font-size: 300%;
-}
-
-.vendorname {
-  background-color: #f9f9f9;
-  color: black;
-  text-align: center;
-}
+    <!-- Application Scripts -->
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/services/qstatus.js"></script>
+    <script type="text/javascript" src="scripts/controllers/QueueViewer.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+		
+		
+		<style type='text/css'>
+		
+		.bookedbox {
+		  background-color: #f9f9f9;
+		  color: black;
+		  text-align: center;
+		  font-size: 300%;
+		}
+		
+		.vendorname {
+		  background-color: #f9f9f9;
+		  color: black;
+		  text-align: center;
+		}
 
 
 </style>
@@ -172,22 +190,6 @@
       
       <!-- Include all compiled plugins (below), or include individual files
             as needed -->
-	  <script src="bs/js/bootstrap.min.js"></script>
-    <!-- Application Dependencies -->
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js"></script>
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
-    
-    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>
-
-    <!-- Application Scripts -->
-    <script type="text/javascript" src="scripts/app.js"></script>
-    <script type="text/javascript" src="scripts/services/qstatus.js"></script>
-    <script type="text/javascript" src="scripts/controllers/QueueViewer.js"></script>
-    <script type="text/javascript" src="js/bootbox.min.js"></script>
     
 	  </body>
 </html>
