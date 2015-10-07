@@ -26,6 +26,10 @@
                 vm.flag_show_number = false;
                 vm.flag_show_otp = false;
                 
+                vm.flag_introduction = true;
+                vm.flag_show_customer_help = false;
+                vm.flag_show_provider_help = false;
+                
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
                 vm.vendor_info_map = angular.fromJson($cookies.get('vendor_info_map'));
@@ -70,6 +74,33 @@
                 vm.message ='';
          	}
 
+            vm.toggleshow_provider_help = function (){
+            	if ( vm.flag_show_provider_help ) {
+            		vm.flag_show_provider_help = false ;
+            	} else {
+            		vm.flag_show_provider_help = true;
+            		vm.flag_show_customer_help = false ;
+            	}
+            }
+            
+            vm.toggleshow_customer_help = function (){
+            	if ( vm.flag_show_customer_help ) {
+            		vm.flag_show_customer_help = false ;
+            	} else {
+            		vm.flag_show_customer_help = true;
+            		vm.flag_show_provider_help = false ;
+            	}
+            }
+
+            
+            vm.toggleAssistance = function (){
+            	if ( vm.flag_introduction ) {
+            		vm.flag_introduction = false ;
+            	} else {
+            		vm.flag_introduction = true;
+            	}
+            }
+            
             // Fetches the time entries and puts the results
             // on the vm.timeentries array
          	

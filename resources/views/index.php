@@ -66,8 +66,9 @@
 
 </style>
 
+	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
 		
-		</head>
+	</head>
    <body ng-app="easywait" ng-controller="QueueViewer as vm" data-ng-init="vm.init()">
 
    <div id="navbar"></div>
@@ -77,9 +78,31 @@
       <div class="container">
       	<div class="row">
       	<h3></h3>
+      	      	<h3></h3>
       	</div>
-	      	<div class="row">
-	
+
+      	<div ng-if="vm.flag_introduction" class="row">
+	      		
+	      		<div class="col-md-6">
+      			<h1>Hate Queues? Tune in to get relieved.</h1>
+      		    <hr>
+      		    <h3 ng-click="vm.toggleshow_customer_help()">If you are a customer, intersted in knowing a Queue Status and Booking Appointments. Click here to know how</h3>
+
+				<p ng-if="vm.flag_show_customer_help" ><iframe title="YouTube video player" src="http://www.youtube.com/embed/hqiNL4Hn04A" width="480" height="390" frameborder="0"></iframe></p>      		    
+      		    
+      		    </div>
+
+	      		<div class="col-md-6">
+				<hr>
+      		    <h3 ng-click="vm.toggleshow_provider_help()">If you are a facility owner or manager, troubled by unmanageable crowd and answering current status request phone calls.  Click here to know how</h3>
+				<p ng-if="vm.flag_show_provider_help" ><iframe title="YouTube video player" src="http://www.youtube.com/embed/hqiNL4Hn04A" width="480" height="390" frameborder="0"></iframe></p>      		    
+      		    
+      		    </div>
+      	</div>
+      	
+      	<div ng-if="! vm.flag_introduction" class="row">
+			
+      	
 	      		<div class="col-md-4">
 	      		
 					<div class="input-group">
@@ -184,8 +207,16 @@
 
 
 		
-      </div>
 
+    <div class="footer">
+      <div class="container">
+      <p class="text-muted">
+      <button ng-if="vm.flag_introduction" class="glyphicon glyphicon-user btn btn-danger" ng-click="vm.toggleAssistance()"></button>
+      <button ng-if="! vm.flag_introduction" class="glyphicon glyphicon-user btn btn-info" ng-click="vm.toggleAssistance()"></button>
+      Powered By <a href="mailto:allied.service.14@gmail.com?Subject=Contact Us" target="_top">allied.service.14@gmail.com</a>
+		</p>
+      </div>
+    </div>
       
       
       <!-- Include all compiled plugins (below), or include individual files
