@@ -47,7 +47,7 @@
 
                 if ( vm.mobile ) {
                 	vm.flag_viewing_queue = true;
-                	
+                    vm.getStatus();
                 } else {
                 	vm.flag_viewing_queue = false;
                 }
@@ -70,7 +70,6 @@
                 	vm.vendor_info_map = {};
                 }
 
-                vm.getStatus();
                 vm.message ='';
          	}
 
@@ -151,11 +150,9 @@
                   vm.isAcceptingBookings = results.data.bookings_open;
                   vm.qsize = results.data.qsize;
                   if ( vm.isAcceptingBookings == "0") {
-                  	vm.AppointmentsOpen = '';
-                  	vm.AppointmentsClosed = 'Closed';
+                	  vm.isAcceptingBookings = false;
                   } else {
-                  	vm.AppointmentsOpen = 'Open';
-                  	vm.AppointmentsClosed = '';
+                	  vm.isAcceptingBookings = true;
                   }
 
         		  //$timeout(vm.getStatus, 60000);
@@ -324,6 +321,8 @@
                     } else {
                     	bootbox.alert("Failed to book appointment: " + results.data.srvr_msg, function() {});
                     }
+                    vm.getStatus();
+                    
             }, function(error) {
                   console.log(error);
                 });
@@ -362,11 +361,9 @@
             		vm.isAcceptingBookings = results.data.bookings_open;
 
                     if ( vm.isAcceptingBookings == "0") {
-                    	vm.AppointmentsOpen = '';
-                    	vm.AppointmentsClosed = 'Closed';
+                    	vm.isAcceptingBookings = false;
                     } else {
-                    	vm.AppointmentsOpen = 'Open';
-                    	vm.AppointmentsClosed = '';
+                    	vm.isAcceptingBookings = true;
                     }
                     console.log(results);
                 }, function(error) {

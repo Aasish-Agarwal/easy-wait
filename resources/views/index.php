@@ -135,9 +135,9 @@
 
 	      		<div ng-if="vm.flag_viewing_queue" class="col-md-4">
 					<h3>Appointments:
-					<span class="label label-danger">{{vm.AppointmentsClosed}}</span> 
-					<span class="label label-success">{{vm.AppointmentsOpen}}</span>			    
-					<span class="label label-primary">Next: {{vm.qsize}} </span></h3>			    
+					<span ng-if="! vm.isAcceptingBookings" class="label label-danger"><i class="fa fa-power-off"></i></span> 
+					<span ng-if="vm.isAcceptingBookings" class="label label-success"><i class="fa fa-power-off"></i></span>
+					</h3>			    
 					
 					
 					<table class="table table-striped" >
@@ -156,13 +156,14 @@
 					</table>			
 			      	
 
-		      		<div ng-show="vm.isAcceptingBookings">
+		      		<div ng-if="vm.isAcceptingBookings">
 						<form class="navbar-form">
 		                	<input type="text" class="form-control" ng-model="vm.booking_reference" placeholder="Reference" ng-minlength=2 ng-maxlength=32>
 		                    </input>
 		                	<input type="number" class="form-control" ng-model="vm.preferred_position" placeholder="Preferred Position" ng-minlength=1 ng-maxlength=2>
 		                    </input>
 		                    <button class="btn btn-primary"  ng-click="vm.addBooking(vm.mobile,vm.booking_reference,vm.preferred_position)">Book</button>
+		                    You are likely to get number {{vm.qsize}} or later
 						</form>
 					</div>
 					
