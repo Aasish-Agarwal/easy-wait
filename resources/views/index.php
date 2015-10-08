@@ -8,6 +8,7 @@
          
 	  		<link href="bs/css/bootstrap.min.css" rel="stylesheet">
          	  <link href="bs/css/bootstrap-theme.min.css" rel="stylesheet">
+      <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
          	  
 	  
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media

@@ -25,6 +25,7 @@
                 vm.periodic_reserved_slots = 0;
 
                 vm.flag_authenticated = false;
+                vm.flag_show_settings = false;
                 
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
@@ -67,6 +68,14 @@
               });
             }              
 
+            vm.toggleSettings = function() {
+            	if ( vm.flag_show_settings ) {
+            		vm.flag_show_settings = false ;
+            	} else {
+            		vm.flag_show_settings = true;
+            	}
+            	
+            }
             vm.stoplocal = function() {
             	bootbox.confirm("Do you really want to stop the session?", function(result) {
             		if ( result == true ) {
@@ -137,11 +146,9 @@
             	qstatus.isAcceptingAppointment(vm.registered_mobile).then(function(results) {
             		vm.isAcceptingBookings = results.data.bookings_open;
                     if ( vm.isAcceptingBookings == "0") {
-                    	vm.isAcceptingBookings = '';
-                    	vm.isNotAcceptingBookings = 'Closed';
+                    	vm.isAcceptingBookings = false ;
                     } else {
-                    	vm.isAcceptingBookings = 'Open';
-                    	vm.isNotAcceptingBookings = '';
+                    	vm.isAcceptingBookings = true ;
                     }
             		console.log(results);
                 }, function(error) {

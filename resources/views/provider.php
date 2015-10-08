@@ -5,6 +5,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <!-- Bootstrap -->
 	  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+      <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+      	  
+	  
+	  
 
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
          queries -->
@@ -100,9 +104,7 @@
     
 			<div class="col-md-4">
 				<h3>Appointments:
-				<span class="label label-danger">{{vm.isNotAcceptingBookings}}</span> 
-				<span class="label label-success">{{vm.isAcceptingBookings}}</span>
-				<span class="label label-primary">Next: {{vm.qsize}}</span>
+				<span class="label label-primary">{{vm.qsize}}</span>
 				</h3>			    
 									<table class="table table-striped" >
 									 	<thead>
@@ -118,29 +120,42 @@
 							
 				<ul class="nav nav-pills" role="tablist">
 				  <li role="presentation"><button type="button" class="btn btn-danger btn-lg"   ng-click="vm.clearAllBookings()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </button></li>
-				  <li role="presentation"><button type="button" class="btn btn-danger btn-lg" ng-click="vm.closeAppointments()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button></li>
-				  <li role="presentation"><button type="button" class="btn btn-success btn-lg"  ng-click="vm.acceptAppointments()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </button></li>
+
+				  <li  ng-if="vm.isAcceptingBookings"  role="presentation"><button type="button" class="btn btn-danger btn-lg" ng-click="vm.closeAppointments()">
+				  	<span aria-hidden="true"><i class="fa fa-power-off"></i></span> </button></li>
+				  <li  ng-if="! vm.isAcceptingBookings"  role="presentation"><button type="button" class="btn btn-success btn-lg"  ng-click="vm.acceptAppointments()">
+				  	<span aria-hidden="true"><i class="fa fa-power-off"></i></span> </button></li>
+
 				  <li role="presentation"><button type="button" class="btn btn-primary btn-lg"  ng-click="vm.refreshView()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></li>
-				</ul>
+				  <li role="presentation"><button type="button" class="btn btn-primary btn-lg"  ng-click="vm.toggleSettings()">
+				  	<span aria-hidden="true"><i class="fa fa-cog"></i></span></button></li>
+				  
+				  </ul>
 			</div>
 			
-			<div class="col-md-4">
+			<div ng-if="vm.flag_show_settings" class="col-md-4">
 				<h3>Settings:</h3>
 				<hr>
 					You have first <span style="font-size:1.1em;" class="label label-info">{{vm.initial_reserved_slots}}</span> slots free. Set this to a different value if you want.
-	                <form class="navbar-form">
-	                	<input type="number" data-toggle="tooltip" title="Initial Appointments To Reserve" class="form-control" ng-model="vm.initial_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2></input>
-	                	<button class="glyphicon glyphicon-ok btn btn-success" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip',vm.initial_slots_to_reserve)"></button>
-					</form>
-				 
+					<div class="input-group">
+				      <input type="number" data-toggle="tooltip" title="Initial Appointments To Reserve" class="form-control" ng-model="vm.initial_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2>
+				      <span class="input-group-btn">
+				        <button class="glyphicon glyphicon-arrow-right btn btn-primary" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip',vm.initial_slots_to_reserve)"></button>
+				      </span>
+					</div><!-- /input-group -->
+					
+					
+					
 				<hr>
 					You have A free Slot after every <span style="font-size:1.1em;" class="label label-info">{{vm.periodic_reserved_slots}}</span> Appointments. Set this to a different value if you want.
 
-	                <form class="navbar-form">
-	                	<input type="number" data-toggle="tooltip" title="Free Slot After N Bookings" class="form-control" ng-model="vm.periodic_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2></input>
-	                	<button class="glyphicon glyphicon-ok btn btn-success" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip_every',vm.periodic_slots_to_reserve)"></button>
-					</form>
-				
+					<div class="input-group">
+				      <input type="number" data-toggle="tooltip" title="Free Slot After N Bookings" class="form-control" ng-model="vm.periodic_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2>
+				      <span class="input-group-btn">
+				        <button class="glyphicon glyphicon-arrow-right btn btn-primary" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip_every',vm.periodic_slots_to_reserve)"></button>
+				      </span>
+					</div><!-- /input-group -->
+					
 				<hr>
 			
 			</div>
