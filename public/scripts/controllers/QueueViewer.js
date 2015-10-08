@@ -26,7 +26,6 @@
                 vm.flag_show_number = false;
                 vm.flag_show_otp = false;
                 
-                vm.flag_introduction = true;
                 vm.flag_show_customer_help = false;
                 vm.flag_show_provider_help = false;
                 
@@ -36,6 +35,14 @@
                 vm.current_bookings = angular.fromJson($cookies.get('current_bookings'));
                 vm.all_bookings = angular.fromJson($cookies.get('all_bookings'));
                 vm.booked_counters = {};
+
+                vm.flag_introduction = $cookies.get('introduction_watched');
+
+                if ( ! vm.flag_introduction ) {
+                	vm.flag_introduction = true;
+                } else {
+                	vm.flag_introduction = false;
+                }
                 
                 vm.expireDate = new Date();
                 vm.expireDate.setDate(vm.expireDate.getDate() + 365);
@@ -98,6 +105,7 @@
             	} else {
             		vm.flag_introduction = true;
             	}
+                $cookies.put('introduction_watched','watched', {'expires': vm.expireDate});
             }
             
             // Fetches the time entries and puts the results

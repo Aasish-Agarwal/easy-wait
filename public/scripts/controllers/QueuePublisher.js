@@ -193,6 +193,12 @@
         			vm.initial_reserved_slots = results.data.skip;
         			vm.periodic_reserved_slots = results.data.skip_every;
             		
+        			if ( ! vm.initial_reserved_slots ) {
+        				vm.initial_reserved_slots = 0;
+        			} 
+        			if ( ! vm.periodic_reserved_slots ) {
+        				vm.periodic_reserved_slots = 0;
+        			} 
             	}, function(error) {
                   console.log(error);
                 });

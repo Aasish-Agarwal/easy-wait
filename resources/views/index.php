@@ -86,17 +86,25 @@
 	      		
 	      		<div class="col-md-6">
       			<h1>Hate Queues? Tune in to get relieved.</h1>
+				<ul >
+				  <li role="presentation">Doctors, Restraunts, Temples, Community Events</li>
+				  <li role="presentation">Wherever is a long quque</li>
+				</ul>
+      			<hr>
+      			<h3>Waiting Made Easy In 5 Steps <button ng-if="vm.flag_introduction" class="btn btn-success" ng-click="vm.toggleAssistance()">Start Now</button></h3>
+      			<img src="img/qsnapshot.png" width="600" height="500" alt="" /> 
+      			
+				<ul >
+				  <li role="presentation">Provider Registers With Its Phone Number</li>
+				  <li role="presentation">Provider Shares The Number With Customers</li>
+				  <li role="presentation">Customers Subscribe The Providers Number</li>
+				  <li role="presentation">Provider Updates Queue Status</li>
+				  <li role="presentation">Customers Refreshes Status View</li>
+				</ul>
+      			
       		    <hr>
-      		    <h3 ng-click="vm.toggleshow_customer_help()">If you are a customer, intersted in knowing a Queue Status and Booking Appointments. Click here to know how</h3>
-
-				<p ng-if="vm.flag_show_customer_help" ><iframe title="YouTube video player" src="http://www.youtube.com/embed/hqiNL4Hn04A" width="480" height="390" frameborder="0"></iframe></p>      		    
-      		    
-      		    </div>
-
-	      		<div class="col-md-6">
-				<hr>
-      		    <h3 ng-click="vm.toggleshow_provider_help()">If you are a facility owner or manager, troubled by unmanageable crowd and answering current status request phone calls.  Click here to know how</h3>
-				<p ng-if="vm.flag_show_provider_help" ><iframe title="YouTube video player" src="http://www.youtube.com/embed/hqiNL4Hn04A" width="480" height="390" frameborder="0"></iframe></p>      		    
+      			<h3>Ask your provider to register with us now</h3>
+				<button ng-if="vm.flag_introduction" class="btn btn-success" ng-click="vm.toggleAssistance()">Start Now</button>      		    
       		    
       		    </div>
       	</div>
