@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/spa', function () {
+	return view('spa');
+});
+	
 Route::get('/provider', function () {
 	return view('provider');
 });
