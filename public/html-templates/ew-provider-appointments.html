@@ -1,0 +1,27 @@
+<hr>
+	<ul class="nav nav-pills" role="tablist">
+	  <li role="presentation">Appointments:</li>
+
+	  <li  ng-if="vm.isAcceptingBookings"  role="presentation"><button type="button" class="btn btn-danger btn-sm" ng-click="vm.closeAppointments()">
+	  	<span aria-hidden="true"><i class="fa fa-power-off"></i></span> Turn Off</button></li>
+	  <li  ng-if="! vm.isAcceptingBookings"  role="presentation"><button type="button" class="btn btn-success btn-sm"  ng-click="vm.acceptAppointments()">
+	  	<span aria-hidden="true"><i class="fa fa-power-off"></i></span>  Turn On</button></li>
+	</ul>
+	<br>
+
+	<div ng-if="vm.isAcceptingBookings">
+	Next Available Slot: {{vm.qsize}}
+	<br>
+	</div>
+
+<table class="table table-striped" >
+	<tbody ng:repeat="booking in vm.current_bookings">
+		<tr><td>{{booking.reference}}</td><td>{{booking.counter}}</td></tr>
+	</tbody>
+	<tfoot>
+	<tr>
+		<td colspan="3"><button data-toggle="tooltip" title="Cancel All"  class="glyphicon glyphicon-trash btn btn-danger" ng-click="vm.clearAllBookings()"> Cancel All</button></td>
+	</tr>
+	</tfoot>	    
+</table>			
+					

@@ -1,0 +1,20 @@
+<table >
+	  <tr>
+	  <td ><button type="button" class="btn btn-danger btn-lg" ng-click="vm.stoplocal()"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></button></td>
+	  <td class="localcounter" align="centre">{{vm.counter}}</td>
+	  <td ><button type="button" class="btn btn-primary btn-lg" ng-click="vm.nextlocal()"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button></td>
+	  </tr>
+</table>
+<br>
+<table class="table" border>
+	<tr>
+		<td class="vendorname" valign="middle"> {{vm.server_counter}} </td>
+		<td class="vendorname" ng-click="vm.refreshView()"><span class="glyphicon glyphicon-refresh" aria-hidden="true" > <br>{{ vm.auth_username }}<br> {{ vm.registered_mobile }}</span> </td>
+	</tr>
+
+	<tr>
+		<td class="vendorname" >{{vm.update_rate}} </td>
+		<td class="vendorname" >{{vm.last_updated}} </td>
+	</tr>
+       
+</table>
