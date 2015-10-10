@@ -1,0 +1,34 @@
+	      		<div ng-if="vm.flag_viewing_queue" >
+<hr>
+					<h3>Appointments:
+					<span ng-if="! vm.isAcceptingBookings" class="label label-danger"><i class="fa fa-power-off"></i></span> 
+					<span ng-if="vm.isAcceptingBookings" class="label label-success"><i class="fa fa-power-off"></i></span>
+					</h3>			    
+					Next Available Slot: {{vm.qsize}}
+					<table class="table table-striped" >
+					 	<thead>
+					  <tr>
+					     <th><button data-toggle="tooltip" title="Cancel All"  class="glyphicon glyphicon-trash btn btn-danger" ng-click="vm.cancelAllBookings(vm.mobile)"></button> </th>
+					     <th>Reference</th>
+					     <th>Counter</th>
+					  </tr>
+					 </thead>
+ 					  <tbody ng:repeat="counter in vm.booked_counters">
+						  <td><button class="glyphicon glyphicon-remove btn btn-danger" ng-click="vm.cancelBooking(vm.mobile, vm.current_bookings[counter] , counter)"></button></td>
+						  <td>{{vm.current_bookings[counter]}}</td>
+						  <td>{{counter}}</td>
+					    </tbody>
+					</table>			
+			      	
+
+		      		<div ng-if="vm.isAcceptingBookings">
+						<form class="navbar-form">
+		                	<input type="text" class="form-control" ng-model="vm.booking_reference" placeholder="Reference" ng-minlength=2 ng-maxlength=32>
+		                    </input>
+		                	<input type="number" class="form-control" ng-model="vm.preferred_position" placeholder="Preferred Position" ng-minlength=1 ng-maxlength=2>
+		                    </input>
+		                    <button class="btn btn-primary"  ng-click="vm.addBooking(vm.mobile,vm.booking_reference,vm.preferred_position)">Book</button>
+						</form>
+					</div>
+					
+				</div>

@@ -1,0 +1,19 @@
+			      	<h3>Service Providers: </h3>
+
+					<table class="table table-striped" >
+					 	<thead>
+					  <tr>
+					     <th>Remove</th>
+					     <th>Queue Of</th>
+					     <th>Watch</th>
+					  </tr>
+					 </thead>
+ 					  <tbody ng:repeat="mobile in vm.subscribed_numbers">
+						  <tr>
+						  
+						  <td><button class="glyphicon glyphicon-remove btn btn-danger" ng-click="vm.removeSubscription(mobile)"></button></td>
+						  <td >{{ vm.vendor_info_map[mobile] }}</td>
+						  <td><button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.setMobile(mobile)"></button></td>
+						  </tr>
+ 					  </tbody>
+					</table>			

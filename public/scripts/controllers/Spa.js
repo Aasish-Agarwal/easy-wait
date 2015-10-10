@@ -5,6 +5,55 @@
     'use strict';
 
     angular
+    .module('easywait').directive('clientappointments', function() {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.templateUrl = "/html-templates/ew-client-appointments.html";
+
+        directive.scope = {
+            vm : "=vm"
+        }
+
+        return directive;
+    });    
+
+    
+    angular
+    .module('easywait').directive('serviceproviders', function() {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.templateUrl = "/html-templates/ew-service-providers.html";
+
+        directive.scope = {
+            vm : "=vm"
+        }
+
+        return directive;
+    });    
+
+    
+    
+    angular
+    .module('easywait').directive('servicesubscription', function() {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.templateUrl = "/html-templates/ew-servicesubscription.html";
+
+        directive.scope = {
+            vm : "=vm"
+        }
+
+        return directive;
+    });    
+    
+    
+    angular
     .module('easywait').directive('servicestatus', function() {
         var directive = {};
 
@@ -53,7 +102,7 @@
 
   
     angular
-    .module('easywait').directive('ewhome', function() {
+    .module('easywait').directive('ewoverview', function() {
         var directive = {};
 
         directive.restrict = 'E';
@@ -93,6 +142,14 @@
                 
                 vm.flag_show_customer_help = false;
                 vm.flag_show_provider_help = false;
+                
+                
+                vm.IDX_HOME = 0;
+                vm.IDX_CUSTOMER = 1;
+                vm.IDX_PROVIDER = 2;
+                vm.IDX_SETTINGS = 3;
+                vm.visibleSection = new Array(true,false,false,false);
+                
                 
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
@@ -145,6 +202,17 @@
                 vm.message ='';
          	}
 
+            vm.setActiveSection = function (section_name ) {
+            	var sections = new Array("home", "customer", "provider", "settings");
+            	for	(var index = 0; index < sections.length; index++) {
+            	    if ( sections[index] == section_name) {
+            	    	vm.visibleSection[index] = true;
+            	    } else {
+            	    	vm.visibleSection[index] = false;
+            	    }
+            	}
+            }
+            
             vm.toggleshow_provider_help = function (){
             	if ( vm.flag_show_provider_help ) {
             		vm.flag_show_provider_help = false ;
