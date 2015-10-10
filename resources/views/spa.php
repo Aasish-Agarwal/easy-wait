@@ -118,6 +118,7 @@
 			<div ng-if="vm.visibleSection[vm.IDX_PROVIDER]" class="row" ng-controller="QueuePublisher as vmprovider" data-ng-init="vmprovider.init()">
 		      		<div class="col-md-4">
 						<qupdater vm="vmprovider"></qupdater>
+						<serverappointments vm="vmprovider"></serverappointments>
 		      		</div>
 			</div>
 			
