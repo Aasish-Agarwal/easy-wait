@@ -6,19 +6,19 @@
 					</h3>			    
 					Next Available Slot: {{vm.qsize}}
 					<table class="table table-striped" >
-					 	<thead>
-					  <tr>
-					     <th><button data-toggle="tooltip" title="Cancel All"  class="glyphicon glyphicon-trash btn btn-danger" ng-click="vm.cancelAllBookings(vm.mobile)"></button> </th>
-					     <th>Reference</th>
-					     <th>Counter</th>
-					  </tr>
-					 </thead>
- 					  <tbody ng:repeat="counter in vm.booked_counters">
+					  	<tbody ng:repeat="counter in vm.booked_counters">
 						  <td><button class="glyphicon glyphicon-remove btn btn-danger" ng-click="vm.cancelBooking(vm.mobile, vm.current_bookings[counter] , counter)"></button></td>
 						  <td>{{vm.current_bookings[counter]}}</td>
 						  <td>{{counter}}</td>
 					    </tbody>
+					    
+						<tfoot>
+						<tr>
+							<td colspan="3"><button data-toggle="tooltip" title="Cancel All"  class="glyphicon glyphicon-trash btn btn-danger" ng-click="vm.cancelAllBookings(vm.mobile)"> Cancel All</button></td>
+						</tr>
+						</tfoot>	    
 					</table>			
+					
 			      	
 
 		      		<div ng-if="vm.isAcceptingBookings">
