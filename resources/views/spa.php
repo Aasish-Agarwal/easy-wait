@@ -75,7 +75,15 @@
 				<ewtoolbar vm="vm"></ewtoolbar>
 			</div>
       	
-		    <!-- Grid System
+		    <!-- Home Screen
+		    ====================================== -->
+			<div ng-if="vm.visibleSection[vm.IDX_HOME]" class="row">
+		      		<div class="col-md-4">
+			      		<ewhome vm="vm"></ewhome>
+			      	</div>
+			</div>
+			
+			<!-- Customer Screen
 		    ====================================== -->
 			<div ng-if="vm.visibleSection[vm.IDX_CUSTOMER]" class="row">
 		      		<div class="col-md-4">
@@ -86,6 +94,32 @@
 						<h4>{{vm.message}}</h4>
 			      	</div>
 			</div>
+
+			<!-- Provider Screen
+		    ====================================== -->
+			<div ng-if="vm.visibleSection[vm.IDX_PROVIDER]" class="row">
+		      		<div class="col-md-4">
+			      		TODO - Providers
+			      	</div>
+			</div>
+			
+		    <!-- Settings Screen
+		    ====================================== -->
+			<div ng-if="vm.visibleSection[vm.IDX_SETTINGS]" class="row">
+		      		<div class="col-md-4">
+			      		TODO - Settings
+			      	</div>
+			</div>
+			
+			
+			<!-- Explore Solution Screen
+		    ====================================== -->
+			<div ng-if="vm.visibleSection[vm.IDX_EXPLORE]" class="row">
+		      		<div class="col-md-4">
+			      		TODO - Explore Solution
+			      	</div>
+			</div>
+
 		</div>
 
 

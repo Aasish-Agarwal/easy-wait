@@ -102,12 +102,12 @@
 
   
     angular
-    .module('easywait').directive('ewoverview', function() {
+    .module('easywait').directive('ewhome', function() {
         var directive = {};
 
         directive.restrict = 'E';
 
-        directive.templateUrl = "/html-templates/solution-overview.html";
+        directive.templateUrl = "/html-templates/ew-home.html";
 
         directive.scope = {
             vm : "=vm"
@@ -148,8 +148,9 @@
                 vm.IDX_CUSTOMER = 1;
                 vm.IDX_PROVIDER = 2;
                 vm.IDX_SETTINGS = 3;
-                vm.visibleSection = new Array(true,false,false,false);
-                
+                vm.IDX_EXPLORE = 4;
+                vm.visibleSection = new Array(true,false,false,false,false);
+                vm.sectionNames = new Array("home", "customer", "provider", "settings", "explore");
                 
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
@@ -203,9 +204,8 @@
          	}
 
             vm.setActiveSection = function (section_name ) {
-            	var sections = new Array("home", "customer", "provider", "settings");
-            	for	(var index = 0; index < sections.length; index++) {
-            	    if ( sections[index] == section_name) {
+            	for	(var index = 0; index < vm.sectionNames.length; index++) {
+            	    if ( vm.sectionNames[index] == section_name) {
             	    	vm.visibleSection[index] = true;
             	    } else {
             	    	vm.visibleSection[index] = false;
