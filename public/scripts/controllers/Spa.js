@@ -5,6 +5,22 @@
     'use strict';
 
     angular
+    .module('easywait').directive('qupdater', function() {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.templateUrl = "/html-templates/ew-qupdater.html";
+
+        directive.scope = {
+            vm : "=vm"
+        }
+
+        return directive;
+    });    
+
+    
+    angular
     .module('easywait').directive('clientappointments', function() {
         var directive = {};
 
@@ -149,8 +165,13 @@
                 vm.IDX_PROVIDER = 2;
                 vm.IDX_SETTINGS = 3;
                 vm.IDX_EXPLORE = 4;
-                vm.visibleSection = new Array(true,false,false,false,false);
                 vm.sectionNames = new Array("home", "customer", "provider", "settings", "explore");
+
+                vm.last_section = $cookies.get('last_section');
+                
+                
+                vm.visibleSection = new Array(true,false,false,false,false);
+
                 
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));

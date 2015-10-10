@@ -62,7 +62,21 @@
             	qstatus.getStatus(vm.registered_mobile).then(function(results) {
             	 vm.server_counter = results.data.counter;
                  vm.qsize = results.data.qsize;
-            	 console.log(results);
+
+	       		  if (vm.counter > 0 ) {
+	                  vm.update_rate = Math.round((results.data.updtm - results.data.starttm)/60/vm.counter) + ' min each';
+	    		  } else {
+	    			  vm.update_rate = '';
+	    		  }
+	
+	    		  vm.last_updated = Math.round((results.data.tmnow - results.data.updtm)/60) ;
+	              if ( vm.last_updated > 120 ) {
+	            	  vm.last_updated = '';
+	              } else {
+	            	  vm.last_updated += ' min ago';
+	              }
+                 
+                 console.log(results);
               }, function(error) {
                 console.log(error);
               });

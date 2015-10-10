@@ -41,11 +41,21 @@
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/services/qstatus.js"></script>
     <script type="text/javascript" src="scripts/controllers/Spa.js"></script>
+    <script type="text/javascript" src="scripts/controllers/QueuePublisher.js"></script>
     <script type="text/javascript" src="js/bootbox.min.js"></script>
 		
 		
 	<style type='text/css'>
-		
+		.localcounter {
+		  width: 70%;
+		  color: white;
+		  font-size: 2em;
+		  background-color: green;
+		  vertical-align: middle;
+		  text-align: center;
+		}
+
+
 		.bookedbox {
 		  background-color: #f9f9f9;
 		  color: black;
@@ -105,9 +115,9 @@
 
 			<!-- Provider Screen
 		    ====================================== -->
-			<div ng-if="vm.visibleSection[vm.IDX_PROVIDER]" class="row">
+			<div ng-if="vm.visibleSection[vm.IDX_PROVIDER]" class="row" ng-controller="QueuePublisher as vmprovider" data-ng-init="vmprovider.init()">
 		      		<div class="col-md-4">
-			      		<servicestatus vm="vm"></servicestatus>
+						<qupdater vm="vmprovider"></qupdater>
 		      		</div>
 			</div>
 			
