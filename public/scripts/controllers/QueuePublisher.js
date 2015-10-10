@@ -56,6 +56,19 @@
                 }
          	}
 
+            vm.setVendorName = function(  ) {
+            	if ( vm.name_to_publish && vm.name_to_publish.length > 0 ) {
+                	qstatus.setvendorname(vm.auth_token,vm.name_to_publish).then(function(results) {
+                    	vm.auth_username = vm.name_to_publish;
+                    	vm.name_to_publish = '';
+                        console.log(results);
+                    }, function(error) {
+                      console.log(error);
+                    });
+            	}
+            }
+
+            
           // on the vm.timeentries array
             vm.getStatus = function() {
             	vm.message = '' ;
