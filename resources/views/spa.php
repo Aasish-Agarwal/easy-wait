@@ -44,12 +44,13 @@
     <script type="text/javascript" src="js/bootbox.min.js"></script>
 		
 		
-		<style type='text/css'>
+	<style type='text/css'>
 		
 		.bookedbox {
 		  background-color: #f9f9f9;
 		  color: black;
 		  text-align: center;
+		  vertical-align: middle;
 		  font-size: 300%;
 		}
 		
@@ -57,10 +58,17 @@
 		  background-color: #f9f9f9;
 		  color: black;
 		  text-align: center;
+		  vertical-align: middle;
 		}
 
-
-</style>
+		td span {
+		    display:block;
+		    width:100%;
+		  text-align: center;
+		  vertical-align: middle;
+		}
+		
+	</style>
 
 	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
 		
@@ -99,8 +107,8 @@
 		    ====================================== -->
 			<div ng-if="vm.visibleSection[vm.IDX_PROVIDER]" class="row">
 		      		<div class="col-md-4">
-			      		TODO - Providers
-			      	</div>
+			      		<servicestatus vm="vm"></servicestatus>
+		      		</div>
 			</div>
 			
 		    <!-- Settings Screen

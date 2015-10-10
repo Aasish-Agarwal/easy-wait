@@ -1,8 +1,8 @@
 	      		<div ng-if="vm.flag_viewing_queue" >
 <hr>
 					<h3>Appointments:
-					<span ng-if="! vm.isAcceptingBookings" class="label label-danger"><i class="fa fa-power-off"></i></span> 
-					<span ng-if="vm.isAcceptingBookings" class="label label-success"><i class="fa fa-power-off"></i></span>
+					<span ng-if="! vm.isAcceptingBookings" class="label label-danger">Off</i></span> 
+					<span ng-if="vm.isAcceptingBookings" class="label label-success">On</span>
 					</h3>			    
 					Next Available Slot: {{vm.qsize}}
 					<table class="table table-striped" >
