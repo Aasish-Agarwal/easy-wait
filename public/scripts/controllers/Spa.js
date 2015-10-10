@@ -4,6 +4,21 @@
     
     'use strict';
 
+    angular
+    .module('easywait').directive('providersettings', function() {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.templateUrl = "/html-templates/ew-provider-settings.html";
+
+        directive.scope = {
+            vm : "=vm"
+        }
+
+        return directive;
+    });    
+    
     
     angular
     .module('easywait').directive('serverappointments', function() {

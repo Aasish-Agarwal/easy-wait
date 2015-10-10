@@ -124,9 +124,9 @@
 			
 		    <!-- Settings Screen
 		    ====================================== -->
-			<div ng-if="vm.visibleSection[vm.IDX_SETTINGS]" class="row">
+			<div ng-if="vm.visibleSection[vm.IDX_SETTINGS]" class="row" ng-controller="QueuePublisher as vmprovider" data-ng-init="vmprovider.init()">
 		      		<div class="col-md-4">
-			      		TODO - Settings
+						<providersettings vm="vmprovider"></providersettings>
 			      	</div>
 			</div>
 			
