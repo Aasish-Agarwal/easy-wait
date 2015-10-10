@@ -143,7 +143,10 @@
             // vm is our capture variable
             var vm = this;
             vm.init = function () {
-                // Initialize the counter & mobile.
+                vm.expireTomorrow = new Date();
+                vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
+            	
+            	// Initialize the counter & mobile.
                 vm.counter = '';
                 vm.message = '';
                 vm.token='';
@@ -166,12 +169,13 @@
                 vm.IDX_SETTINGS = 3;
                 vm.IDX_EXPLORE = 4;
                 vm.sectionNames = new Array("home", "customer", "provider", "settings", "explore");
-
+                vm.visibleSection = new Array();
                 vm.last_section = $cookies.get('last_section');
                 
-                
-                vm.visibleSection = new Array(true,false,false,false,false);
-
+                if ( ! vm.last_section ) {
+                	vm.last_section = "home";
+                } 
+                vm.setActiveSection(vm.last_section);
                 
                 vm.mobile = $cookies.get('last_subscription');
                 vm.subscribed_numbers = angular.fromJson($cookies.get('subscribed_numbers'));
@@ -193,8 +197,6 @@
                 vm.isAcceptingBookings = 0;
                 vm.qsize = 0;
                 
-                vm.expireTomorrow = new Date();
-                vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
 
                 if ( vm.mobile ) {
                 	vm.flag_viewing_queue = true;
@@ -228,6 +230,7 @@
             	for	(var index = 0; index < vm.sectionNames.length; index++) {
             	    if ( vm.sectionNames[index] == section_name) {
             	    	vm.visibleSection[index] = true;
+                        $cookies.put('last_section',section_name, {'expires': vm.expireDate});
             	    } else {
             	    	vm.visibleSection[index] = false;
             	    }
