@@ -1,0 +1,21 @@
+<h3>Settings:</h3>
+<hr>
+<div class="well">
+<h4>Appointments</h4>
+	You have first <span style="font-size:1.1em;" class="label label-info">{{vm.initial_reserved_slots}}</span> initial free slots 
+	<br><br>
+      <span class="input-group-btn">
+      <div class="col-xs-3"><input type="number" data-toggle="tooltip" title="Initial Appointments To Reserve" class="form-control" ng-model="vm.initial_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2></div>
+        <button class="glyphicon glyphicon-arrow-right btn btn-primary" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip',vm.initial_slots_to_reserve)"></button>
+      </span>
+
+	<br><br>
+	You have A free Slot after every <span style="font-size:1.1em;" class="label label-info">{{vm.periodic_reserved_slots}}</span> appointments
+	<br><br>
+      <span class="input-group-btn">
+      <div class="col-xs-3"><input type="number" data-toggle="tooltip" title="Free Slot After N Bookings" class="form-control" ng-model="vm.periodic_slots_to_reserve" placeholder="0" ng-minlength=1 ng-maxlength=2></div>
+        <button class="glyphicon glyphicon-arrow-right btn btn-primary" data-toggle="tooltip" title="Click To Set"  ng-click="vm.setConfiguration('skip_every',vm.periodic_slots_to_reserve)"></button>
+      </span>
+</div>
+<hr>
+<h4>Display Name</h4>
