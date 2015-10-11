@@ -206,6 +206,8 @@
             } 
 
             vm.setConfiguration = function(name,value) {
+                if ( parseInt(value) >= 0 ) {
+
             	qstatus.setConfiguration(vm.auth_token, name + '=' + value).then(function(results) {
             		if ( name == 'skip') {
             			vm.initial_slots_to_reserve = '';
@@ -214,9 +216,12 @@
             			vm.periodic_slots_to_reserve = '';
             		}
             		vm.getConfiguration();
-            }, function(error) {
-                  console.log(error);
-                });
+            		}, function(error) {
+            				console.log(error);
+            		});
+                } else {
+                	bootbox.alert("Numeric Value Required", function() {});
+                }
             }
 
             vm.getConfiguration = function() {
