@@ -114,22 +114,32 @@
 			</div>
 
 			<div ng-controller="QueuePublisher as vmprovider" data-ng-init="vmprovider.init()">
-			<!-- Provider Screen
-		    ====================================== -->
-			<div ng-if="vm.visibleSection[vm.IDX_PROVIDER]" class="row" >
-		      		<div class="col-md-4">
-						<qupdater vm="vmprovider"></qupdater>
-						<serverappointments vm="vmprovider"></serverappointments>
-		      		</div>
-			</div>
-			
-		    <!-- Settings Screen
-		    ====================================== -->
-			<div ng-if="vm.visibleSection[vm.IDX_SETTINGS]" class="row">
-		      		<div class="col-md-4">
-						<providersettings vm="vmprovider"></providersettings>
-			      	</div>
-			</div>
+				<!-- Provider Screen
+			    ====================================== -->
+				<div ng-if="vm.visibleSection[vm.IDX_PROVIDER]" class="row" >
+						<div ng-if="!vmprovider.flag_authenticated" class="col-md-4">
+							<registration vm="vmprovider"></registration>
+						</div>
+				
+				
+						<div ng-if="vmprovider.flag_authenticated" class="col-md-4">
+							<qupdater vm="vmprovider"></qupdater>
+							<serverappointments vm="vmprovider"></serverappointments>
+			      		</div>
+				</div>
+				
+			    <!-- Settings Screen
+			    ====================================== -->
+				<div ng-if="vm.visibleSection[vm.IDX_SETTINGS]" class="row">
+						<div ng-if="!vmprovider.flag_authenticated" class="col-md-4">
+							<registration vm="vmprovider"></registration>
+						</div>
+				
+				
+						<div  ng-if="vmprovider.flag_authenticated" class="col-md-4">
+							<providersettings vm="vmprovider"></providersettings>
+				      	</div>
+				</div>
 			</div>
 			
 			<!-- Explore Solution Screen

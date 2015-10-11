@@ -8,7 +8,7 @@
         .module('easywait')
         .controller('QueuePublisher', QueuePublisher);
 
-    function QueuePublisher(qstatus, $window, $scope, $timeout, $cookies) {
+    function QueuePublisher(qstatus, $sce,  $window, $scope, $timeout, $cookies) {
 
             // vm is our capture variable
             var vm = this;
@@ -26,6 +26,10 @@
 
                 vm.flag_authenticated = false;
                 vm.flag_show_settings = false;
+
+                vm.flag_show_name = true;
+                vm.flag_show_number = false;
+                vm.flag_show_otp = false;
                 
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
@@ -59,6 +63,7 @@
             	if ( vm.name_to_publish && vm.name_to_publish.length > 0 ) {
                 	qstatus.setvendorname(vm.auth_token,vm.name_to_publish).then(function(results) {
                     	vm.auth_username = vm.name_to_publish;
+                        $cookies.put('auth_username',vm.auth_username, {'expires': vm.expireDate});
                     	vm.name_to_publish = '';
                         console.log(results);
                     }, function(error) {
@@ -229,7 +234,111 @@
                   console.log(error);
                 });
             }
-    
+
+            vm.showNumberInput  = function() {
+            	if ( vm.name_to_publish && vm.name_to_publish.length > 0 ) {
+            		vm.flag_show_name = false;
+            		vm.flag_show_number = true;
+            		vm.message = 'Provide your mobile number with country code';
+            	}
+            }
+
+            vm.register = function() {
+            	
+                //vm.flag_show_number = false;
+                //vm.flag_show_otp = false;
+
+            	if ( vm.cell_to_register ) {
+                	qstatus.register(vm.cell_to_register).then(function(results) {
+
+                        if ( results.data.status == 'Exception' ) {
+                        	var message = results.data.service_response;
+                        	if ( typeof(message) == 'object') {
+                        		message = JSON.stringify(message);
+                        	}
+                        	bootbox.alert(message, function() {});
+                        } else {
+                    		vm.flag_show_number = false;
+                    		vm.flag_show_otp = true;
+                    		
+                    		var message = results.data.message ;
+                    		message += '<hr>Registration For: ' + vm.cell_to_register;
+                    		message += '<hr>If you do not recieve the missed call in next 10 minutes.';
+                    		message +=  '<ul><li>Verify that you have the correct number specified.</li>' ;
+                    		message += '<li>If the number is correct try again in 10 minutes</li>' ;
+                    		message += '<li>If you still dont get the missed call, contact us via eMail</li></ul>' ;
+                    		
+                    		
+                    		vm.message = $sce.trustAsHtml(message) ;
+                    		
+                    		if (results.data.service == 'cognalys') {
+                    			vm.otp_service = 'cognalys';
+                    			vm.keymatch = results.data.keymatch;
+                    			vm.otp_start = results.data.otp_start;
+                    		} else {
+                    			vm.otp_service = 'motp';
+                    		}
+                        }
+                        console.log(results);
+                	}, function(error) {
+                      console.log(error);
+                    });
+            	} else {
+                	bootbox.alert("Invalid Mobile Number ", function() {});
+            	}
+            } 
+
+            vm.verifyOTP = function() {
+            	vm.message = '' ;
+            	if ( !vm.otp ) {
+                	bootbox.alert("OTP Required", function() {});
+            		return;
+            	}
+            	
+    			var options = '';
+    			if ( vm.otp_service == 'cognalys' ) {
+    				options = 'service=cognalys&keymatch=' + vm.keymatch + '&otp_start=' + vm.otp_start; 
+    			} else {
+    				options = 'service=motp'; 
+    			}
+            	
+            	qstatus.verify(vm.cell_to_register,vm.otp,options).then(function(results) {
+                	if ( results.data.token == "undef" ) {
+                    	bootbox.alert("OTP Is incorrect" , function() {});
+                	} else {
+                		vm.token = results.data.token ;
+
+                    	vm.registered_mobile = vm.cell_to_register;
+                        vm.auth_token = vm.token;
+                		
+                        // Setting a cookie
+                        $cookies.put('registered_mobile',vm.cell_to_register, {'expires': vm.expireDate});
+                        $cookies.put('auth_token',vm.token, {'expires': vm.expireDate});
+                        $cookies.put('auth_username',vm.name_to_publish, {'expires': vm.expireDate});
+                        
+                        vm.cell_of_provider = vm.cell_to_register;
+                        vm.setVendorName();
+
+                        //vm.cell_to_register = '';
+                        vm.otp = '';
+                        //vm.name_to_publish = '';
+                		vm.flag_show_otp = false;
+                    	vm.flag_authenticated = true;
+
+                    	vm.getStatus();
+                        vm.update();
+                        vm.retrieveAll();
+                        vm.currentBookingStatus();
+                        vm.getConfiguration();
+                    	
+                    	vm.message = 'Thanks for giving us an opportunity to serve. You can now start managing your queues' ;
+                	}
+                    console.log(results);
+                }, function(error) {
+                  console.log(error);
+                });
+            }
+            
     
     }
     

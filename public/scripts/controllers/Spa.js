@@ -5,6 +5,23 @@
     'use strict';
 
     angular
+    .module('easywait').directive('registration', function() {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.templateUrl = "/html-templates/ew-registration.html";
+
+        directive.scope = {
+            vm : "=vm"
+        }
+
+        return directive;
+    });    
+    
+    
+    
+    angular
     .module('easywait').directive('providersettings', function() {
         var directive = {};
 
@@ -484,8 +501,6 @@
                         vm.name_to_publish = '';
                 		vm.flag_show_otp = false;
                     	
-                		$window.location.href = '/provider';
-                        
                     	vm.message = 'Thanks for giving us an opportunity to serve. You can now start managing your queues' ;
                 	}
                     console.log(results);
@@ -593,7 +608,6 @@
             		vm.flag_show_number = true;
             		vm.message = 'Provide your mobile number with country code';
             	}
-            	
             }
     }
 
