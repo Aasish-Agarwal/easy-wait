@@ -275,6 +275,18 @@
                 vm.message ='';
          	}
 
+            vm.haselements = function(obj) {
+                var size = 0, key;
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) size++;
+                }
+                if ( size > 0 ) {
+                	return true;
+                } else {
+                	return false;
+                }
+            };
+            
             vm.setActiveSection = function (section_name ) {
             	for	(var index = 0; index < vm.sectionNames.length; index++) {
             	    if ( vm.sectionNames[index] == section_name) {
