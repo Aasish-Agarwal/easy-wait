@@ -12,24 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/spa', function () {
 	return view('spa');
 });
-	
-Route::get('/provider', function () {
-	return view('provider');
-});
-	
+
 Route::get('/about', function () {
 	return view('about');
 });
 
-Route::get('/register', function () {
-	return view('register');
-});
 	
 // A route group allows us to have a prefix, in this case api
 Route::group(array('prefix' => 'api'), function()
