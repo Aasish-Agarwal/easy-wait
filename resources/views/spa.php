@@ -41,7 +41,7 @@
     <script type="text/javascript" src="scripts/app.js"></script>
     <script type="text/javascript" src="scripts/services/qstatus.js"></script>
     <script type="text/javascript" src="scripts/controllers/Spa.js"></script>
-    <script type="text/javascript" src="scripts/controllers/QueuePublisher.js"></script>
+    <script type="text/javascript" src="scripts/controllers/SpaProvider.js"></script>
     <script type="text/javascript" src="js/bootbox.min.js"></script>
 		
 		
