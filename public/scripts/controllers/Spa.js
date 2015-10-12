@@ -5,6 +5,22 @@
     'use strict';
 
     angular
+    .module('easywait').directive('explore', function() {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.templateUrl = "/html-templates/ew-explore.html";
+
+        directive.scope = {
+            vm : "=vm"
+        }
+
+        return directive;
+    });    
+    
+    
+    angular
     .module('easywait').directive('registration', function() {
         var directive = {};
 

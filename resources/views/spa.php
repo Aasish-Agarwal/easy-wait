@@ -146,7 +146,7 @@
 		    ====================================== -->
 			<div ng-if="vm.visibleSection[vm.IDX_EXPLORE]" class="row">
 		      		<div class="col-md-4">
-			      		TODO - Explore Solution
+			      		<explore vm="vm"></explore>
 			      	</div>
 			</div>
 

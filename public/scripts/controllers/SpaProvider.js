@@ -31,6 +31,9 @@
                 vm.flag_show_number = false;
                 vm.flag_show_otp = false;
                 
+                vm.expireDate = new Date();
+                vm.expireDate.setDate(vm.expireDate.getDate() + 365);
+
                 vm.expireTomorrow = new Date();
                 vm.expireTomorrow.setDate(vm.expireTomorrow.getDate() + 1);
                 
