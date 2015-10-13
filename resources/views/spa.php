@@ -158,7 +158,7 @@
     <div class="footer">
       <div class="container">
       <p class="text-muted">
-      Powered By <a href="mailto:allied.service.14@gmail.com?Subject=Contact Us" target="_top">allied.service.14@gmail.com</a>
+      Contact: <a href="mailto:support@lkfans.org?Subject=Contact Us" target="_top">support@lkfans.org</a>
 		</p>
       </div>
     </div>

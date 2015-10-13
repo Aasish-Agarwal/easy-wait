@@ -44,7 +44,7 @@
 		<hr>
 		<div class="jumbotron">
 		  <h1>A Team Of Engineering Students</h1>
-		  <p>Guided By Industry Experts to develop interesting IT applications</p>
+		  <p>Guided By Industry Experts To Develop interesting IT Applications</p>
 		  
 		</div>
 		</div>
@@ -58,7 +58,7 @@
 		<div class=" col-md-6">
 		<hr>
 		  <h1>Interested?</h1>
-		  <p>Feel free to contact us by email: <a href="mailto:allied.service.14@gmail.com?Subject=Contact Us" target="_top">allied.service.14@gmail.com</a></p>
+		  <p>Feel free to contact us by email: <a href="mailto:support@lkfans.org?Subject=Contact Us" target="_top">support@lkfans.org</a></p>
 		</div>
       </div>
 
@@ -71,7 +71,7 @@
     <div class="footer">
       <div class="container">
       <p class="text-muted">
-      Powered By <a href="mailto:allied.service.14@gmail.com?Subject=Contact Us" target="_top">allied.service.14@gmail.com</a>
+      Contact <a href="mailto:support@lkfans.org?Subject=Contact Us" target="_top">support@lkfans.org</a>
 		</p>
       </div>
     </div>
