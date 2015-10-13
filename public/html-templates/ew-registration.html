@@ -10,14 +10,14 @@ User Registration is required to use this feature
    
                 
 <div ng-if="vm.flag_show_number" class="input-group">
-     <input class="form-control" type="number" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13>
+     <input class="form-control" ng-model="vm.cell_to_register" placeholder="91XXXXXXXXXX" ng-minlength=9 ng-maxlength=13>
      <span class="input-group-btn">
 	<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.register()"></button>
      </span>
    </div><!-- /input-group -->
    
 <div ng-if="vm.flag_show_otp" class="input-group">
-	<input class="form-control" ng-model="vm.otp" placeholder="OTP"  type="number"  ng-required=true ng-minlength=3 ng-maxlength=5>
+	<input class="form-control" ng-model="vm.otp" placeholder="OTP"  ng-required=true ng-minlength=3 ng-maxlength=5>
     <span class="input-group-btn">
 		<button class="glyphicon glyphicon-arrow-right btn btn-primary" ng-click="vm.verifyOTP()"></button>
     </span>
