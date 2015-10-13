@@ -21,28 +21,6 @@
          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/
             respond.min.js"></script>
       <![endif]-->
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-       <script src="js/jquery.cookie.js"></script>
-
-
-	  <script src="bs/js/bootstrap.min.js"></script>
-    <!-- Application Dependencies -->
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js"></script>
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
-    
-    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>
-
-    <!-- Application Scripts -->
-    <script type="text/javascript" src="scripts/app.js"></script>
-    <script type="text/javascript" src="scripts/services/qstatus.js"></script>
-    <script type="text/javascript" src="scripts/controllers/Spa.js"></script>
-    <script type="text/javascript" src="scripts/controllers/SpaProvider.js"></script>
-    <script type="text/javascript" src="js/bootbox.min.js"></script>
 		
 		
 	<style type='text/css'>
@@ -109,7 +87,6 @@
 			      		<serviceproviders vm="vm"></serviceproviders>
 			      		<clientappointments vm="vm"></clientappointments>
 			      		<servicesubscription vm="vm"></servicesubscription>
-						<h4>{{vm.message}}</h4>
 			      	</div>
 			</div>
 
@@ -150,6 +127,29 @@
 			      	</div>
 			</div>
 
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+       <script src="js/jquery.cookie.js"></script>
+
+
+	  <script src="bs/js/bootstrap.min.js"></script>
+    <!-- Application Dependencies -->
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+    
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/services/qstatus.js"></script>
+    <script type="text/javascript" src="scripts/controllers/Spa.js"></script>
+    <script type="text/javascript" src="scripts/controllers/SpaProvider.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+			
 		</div>
 
 

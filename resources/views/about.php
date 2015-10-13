@@ -27,7 +27,7 @@
 		</script>
 
    </head>
-   <body ng-app="easywait" ng-controller="QueueViewer as vm" data-ng-init="vm.init()">
+   <body ng-app="easywait" ">
 
    <div id="navbar"></div>
    
@@ -37,19 +37,45 @@
       	<div class="row">
       	<h3></h3>
       	</div>
-      	<div id="about"></div>
 
+	<div class="row">
+
+		<div class=" col-md-6">
+		<hr>
+		<div class="jumbotron">
+		  <h1>A Team Of Engineering Students</h1>
+		  <p>Guided By Industry Experts to develop interesting IT applications</p>
+		  
+		</div>
+		</div>
+
+		<div class=" col-md-6">
+		<hr>
+		  <h1>Our Mission</h1>
+		  <p>Anyone excited about developing IT Applications should have the opportunity irrespective of financial status</p>
+		</div>
+		
+		<div class=" col-md-6">
+		<hr>
+		  <h1>Interested?</h1>
+		  <p>Feel free to contact us by email: <a href="mailto:allied.service.14@gmail.com?Subject=Contact Us" target="_top">allied.service.14@gmail.com</a></p>
+		</div>
       </div>
+
       
       <!-- Include all compiled plugins (below), or include individual files
             as needed -->
 	  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <!-- Application Dependencies -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-resource.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>
-	  
+	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
+</div>    
+    <div class="footer">
+      <div class="container">
+      <p class="text-muted">
+      Powered By <a href="mailto:allied.service.14@gmail.com?Subject=Contact Us" target="_top">allied.service.14@gmail.com</a>
+		</p>
+      </div>
+    </div>
+	
     <!-- Application Scripts -->
     	  
 	  </body>
