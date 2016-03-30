@@ -145,7 +145,7 @@ class VendorController extends Controller
 
 		if ( $cell == '919090909090') {
 	    	$vendor = new Vendor();
-	    	$token = $vendor -> matchOTP($cell,'11111');
+	    	$token = $vendor -> matchOTP($cell,'00000');
 	    	return($token);
 		}
 		
